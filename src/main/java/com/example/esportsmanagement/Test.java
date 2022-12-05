@@ -4,6 +4,6 @@ package com.example.esportsmanagement;
 public class Test {
     public static void main(String[] args) {
         System.out.println("Hodor Hodor Hodor");
-        System.out.println("Test");
+        System.out.println("Test2");
     }
 }
