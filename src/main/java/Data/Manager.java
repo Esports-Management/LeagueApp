@@ -1,2 +1,5 @@
-package Data;public class Manager {
+package Data;
+
+public class Manager extends User{
+    Team team;
 }

@@ -1,2 +1,5 @@
-package Data;public class TournamentCode {
+package Data;
+
+public class TournamentCode {
+    String tournamentCode;
 }
