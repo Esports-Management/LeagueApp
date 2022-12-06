@@ -6,11 +6,11 @@ public class Match {
     TournamentCode tournamentCode;
     Team teamA;
     Team teamB;
-    ArrayList<Player> playersA;
-    ArrayList<Player> playersB;
+    ArrayList<PlayerInMatch> playersA;
+    ArrayList<PlayerInMatch> playersB;
     long gameDuration;
 
-    public Match(TournamentCode tournamentCode, Team teamA, Team teamB, ArrayList<Player> playersA, ArrayList<Player> playersB, long gameDuration) {
+    public Match(TournamentCode tournamentCode, Team teamA, Team teamB, ArrayList<PlayerInMatch> playersA, ArrayList<PlayerInMatch> playersB, long gameDuration) {
         this.tournamentCode = tournamentCode;
         this.teamA = teamA;
         this.teamB = teamB;
@@ -19,7 +19,7 @@ public class Match {
         this.gameDuration = gameDuration;
     }
 
-    public Match(TournamentCode tournamentCode, Team teamA, Team teamB, ArrayList<Player> playersA, ArrayList<Player> playersB) {
+    public Match(TournamentCode tournamentCode, Team teamA, Team teamB, ArrayList<PlayerInMatch> playersA, ArrayList<PlayerInMatch> playersB) {
         this.tournamentCode = tournamentCode;
         this.teamA = teamA;
         this.teamB = teamB;
@@ -64,19 +64,19 @@ public class Match {
         this.teamB = teamB;
     }
 
-    public ArrayList<Player> getPlayersA() {
+    public ArrayList<PlayerInMatch> getPlayersA() {
         return playersA;
     }
 
-    public void setPlayersA(ArrayList<Player> playersA) {
+    public void setPlayersA(ArrayList<PlayerInMatch> playersA) {
         this.playersA = playersA;
     }
 
-    public ArrayList<Player> getPlayersB() {
+    public ArrayList<PlayerInMatch> getPlayersB() {
         return playersB;
     }
 
-    public void setPlayersB(ArrayList<Player> playersB) {
+    public void setPlayersB(ArrayList<PlayerInMatch> playersB) {
         this.playersB = playersB;
     }
 
@@ -88,19 +88,19 @@ public class Match {
         this.gameDuration = gameDuration;
     }
 
-    public void addPlayerA(Player player) {
+    public void addPlayerA(PlayerInMatch player) {
         playersA.add(player);
     }
 
-    public void addPlayerB(Player player) {
+    public void addPlayerB(PlayerInMatch player) {
         playersB.add(player);
     }
 
-    public void addPlayersA(ArrayList<Player> players) {
+    public void addPlayersA(ArrayList<PlayerInMatch> players) {
         playersA.addAll(players);
     }
 
-    public void addPlayersB(ArrayList<Player> players) {
+    public void addPlayersB(ArrayList<PlayerInMatch> players) {
         playersB.addAll(players);
     }
 
