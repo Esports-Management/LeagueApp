@@ -50,19 +50,9 @@ public class DefaultUserService implements UserService {
         return null;
     }
 
-
-//    @Bean
-//    PasswordEncoder getEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-
     private void encodePassword(UserEntity userEntity, UserData user){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         userEntity.setPassword(encoder.encode(user.getPassword()));
     }
-//    @Bean
-//    private void encodePassword( UserEntity userEntity, UserData user){
-//        PasswordEncoder encoder = new BCryptPasswordEncoder();
-//        userEntity.setPassword(encoder.encode(user.getPassword()));
-//    }
+
 }
