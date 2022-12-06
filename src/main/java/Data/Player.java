@@ -1,8 +1,10 @@
 package Data;
 
+import java.util.ArrayList;
+
 public class Player extends User{
-    //Summoner name(s)
-    //Position(s)
+    ArrayList<String> summonerName;
+    ArrayList<String> position;
     Team team;
     int gamesPlayed;
     int gamesWon;

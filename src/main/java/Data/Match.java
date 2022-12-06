@@ -1,10 +1,10 @@
 package Data;
-
+import java.util.ArrayList;
 public class Match {
     TournamentCode tournamentCode;
     Team teamA;
     Team teamB;
-    //Players A
-    //Players B
+    ArrayList<Player> playersA;
+    ArrayList<Player> playersB;
     long gameDuration;
 }
