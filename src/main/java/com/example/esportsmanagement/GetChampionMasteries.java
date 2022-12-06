@@ -25,7 +25,6 @@ public class GetChampionMasteries {
         System.out.println("Mastery level: " + cm.getLevel());
         System.out.println("Points until next level: " + cm.getPointsUntilNextLevel());
 
-        //ChampionMasteries cms = ChampionMasteries.forSummoner(summoner).get();
         final ChampionMasteries cms = summoner.getChampionMasteries();
         System.out.println(cms.get(3).getPoints());
         System.out.println(cms.find(shen.getName()).getPoints());
