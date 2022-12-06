@@ -1,6 +1,6 @@
 package com.example.esportsmanagement.user.jpa.data;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 
 @Entity
