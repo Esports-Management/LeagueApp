@@ -4,10 +4,9 @@ import com.example.esportsmanagement.user.jpa.data.UserEntity;
 import com.example.esportsmanagement.user.jpa.data.UserService;
 import com.example.esportsmanagement.user.jpa.repository.UserRepository;
 import com.example.esportsmanagement.web.data.user.UserData;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -16,9 +15,6 @@ public class DefaultUserService implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -54,7 +50,19 @@ public class DefaultUserService implements UserService {
         return null;
     }
 
-    private void encodePassword( UserEntity userEntity, UserData user){
-        userEntity.setPassword(passwordEncoder.encode(user.getPassword()));
+
+//    @Bean
+//    PasswordEncoder getEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+
+    private void encodePassword(UserEntity userEntity, UserData user){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        userEntity.setPassword(encoder.encode(user.getPassword()));
     }
+//    @Bean
+//    private void encodePassword( UserEntity userEntity, UserData user){
+//        PasswordEncoder encoder = new BCryptPasswordEncoder();
+//        userEntity.setPassword(encoder.encode(user.getPassword()));
+//    }
 }

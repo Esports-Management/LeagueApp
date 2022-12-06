@@ -6,6 +6,9 @@ import java.io.Serializable;
 
 public class UserData implements Serializable {
 
+    @NotEmpty(message = "Nickname can not be empty")
+    private String nickName;
+
     @NotEmpty(message = "First name can not be empty")
     private String firstName;
 
@@ -24,6 +27,17 @@ public class UserData implements Serializable {
     }
     public String getPassword() {
         return password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getNickName() {
+        return nickName;
     }
 
 

@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@EnableJpaRepositories(basePackages = { "com.example.esportsmanagement.user.jpa.repository" })
 @SpringBootApplication
 public class EsportsManagementApplication {
 

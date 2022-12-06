@@ -18,21 +18,21 @@ public class RegistrationController {
     @GetMapping("/register")
     public String register(final Model model){
         model.addAttribute("userData", new UserData());
-        return "account/register";
+        return "/register";
     }
 
     @PostMapping("/register")
     public String userRegistration(final @Valid  UserData userData, final BindingResult bindingResult, final Model model){
         if(bindingResult.hasErrors()){
             model.addAttribute("registrationForm", userData);
-            return "account/register";
+            return "/register";
         }
         try {
             userService.register(userData);
         }catch (Exception e){
             bindingResult.rejectValue("email", "userData.email","An account already exists for this email.");
             model.addAttribute("registrationForm", userData);
-            return "account/register";
+            return "/register";
         }
         return "/starter";
     }
