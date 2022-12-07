@@ -5,6 +5,9 @@ public class User {
     String lastName;
     String userName;
 
+    //Probably need to update this field at some point
+    String password;
+
     public User() {
     }
 
@@ -30,5 +33,13 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

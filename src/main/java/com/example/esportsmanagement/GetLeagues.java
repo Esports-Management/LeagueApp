@@ -12,7 +12,7 @@ import java.util.List;
 
 public class GetLeagues {
     public static void main(final String[] args) {
-        Orianna.setRiotAPIKey("RGAPI-efdd8a66-8bee-4003-8bfe-442fb2048450");
+        Orianna.setRiotAPIKey("RGAPI-7285c537-1136-4084-9c07-4248750d135f");
 
         final Summoner summoner = Summoner.named("Ego the 1st").withRegion(Region.EUROPE_NORTH_EAST).get();
         System.out.println("Name: " + summoner.getName());
