@@ -107,12 +107,9 @@ summoner_1.get_league_info(lol_watcher, my_region)
 summoner_1.get_challenger_by_queue_ranked_solo_5x5(lol_watcher, my_region)
 summoner_1.get_challenger_by_queue_ranked_flex_sr(lol_watcher, my_region)
 
-<<<<<<< HEAD
 match_id = 'EUN1_3257332892'
 
 match_info = summoner_1.get_match_info_by_match_id(lol_watcher, my_region, match_id)
 pprint.pprint(match_info)
-=======
 match_info = summoner_1.get_match_info_by_match_id(lol_watcher, my_region, 'EUN1_3257332892')
 pprint.pprint(match_info)
->>>>>>> feature/API2
