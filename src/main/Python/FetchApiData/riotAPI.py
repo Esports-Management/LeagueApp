@@ -1,6 +1,8 @@
 import riotwatcher
 from datetime import datetime
 import pprint
+import APIToMySQL
+
 
 class Summoner:
 
@@ -62,6 +64,7 @@ class Summoner:
             match_statistics[match_metadata['info']['participants'][i]['summonerName']]['visionScore'] = \
             match_metadata['info']['participants'][i]['visionScore']
 
+        APIToMySQL.insert_to_match_statistics_table(match_statistics)
         return match_statistics
 
     def get_leagues_player_is_in(self):
@@ -89,7 +92,7 @@ class Summoner:
                       self.queue[game_type]['tier']
                       )
 
-api_key = 'RGAPI-fcf16d93-9083-4c49-bb39-151da322e68a'
+api_key = ''
 my_region = 'eun1'
 name = 'Ego the 1st'
 
@@ -104,7 +107,12 @@ summoner_1.get_league_info(lol_watcher, my_region)
 summoner_1.get_challenger_by_queue_ranked_solo_5x5(lol_watcher, my_region)
 summoner_1.get_challenger_by_queue_ranked_flex_sr(lol_watcher, my_region)
 
+<<<<<<< HEAD
 match_id = 'EUN1_3257332892'
 
 match_info = summoner_1.get_match_info_by_match_id(lol_watcher, my_region, match_id)
 pprint.pprint(match_info)
+=======
+match_info = summoner_1.get_match_info_by_match_id(lol_watcher, my_region, 'EUN1_3257332892')
+pprint.pprint(match_info)
+>>>>>>> feature/API2
