@@ -77,7 +77,7 @@ class Summoner:
                       self.queue[game_type]['tier']
                       )
 
-api_key = ''
+api_key = 'RGAPI-fcf16d93-9083-4c49-bb39-151da322e68a'
 my_region = 'eun1'
 name = 'Ego the 1st'
 
