@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <meta charset="utf-8">
-
+<script>
+    function onChange() {
+        const password = document.querySelector('input[name=password]');
+        const confirm = document.querySelector('input[name=confirm]');
+        if (confirm.value === password.value) {
+            confirm.setCustomValidity('');
+        } else {
+            confirm.setCustomValidity('Passwords do not match');
+        }
+    }
+</script>
 <body class="hold-transition register-page">
 <div class="register-box">
 
@@ -12,7 +22,7 @@
                 <p th:text="${registrationMsg}"></p>
             </div>
             <div th:if="${registrationMsg != null}">
-                <img class="col-md-12" th:src="${qrCode}" />
+                <img class="col-md-12" th:src="${qrCode}"/>
                 <p th:text="${qrCodeKey}"></p>
             </div>
             <div th:if="${registrationMsg == null}">
@@ -60,23 +70,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" th:field="*{password}" placeholder="Password"
-                               th:errorclass="is-invalid">
 
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                    <div class="input group mb-3">
+                        <form>
+                           <input placeholder="password" type="password" onChange="onChange()"
+                                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required
+                                                    th:field="*{password}"/> </label><br/>
+                           <input placeholder="confirm" type="password" onChange="onChange()"/> </label><br/>
+                            <input type="submit"/>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Retype password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="row">
                         <div class="col-8">
