@@ -10,7 +10,7 @@ import com.merakianalytics.orianna.types.core.summoner.Summoner;
 
 public class Example {
     public static void main(String[] args) {
-        Orianna.setRiotAPIKey("RGAPI-efdd8a66-8bee-4003-8bfe-442fb2048450");
+        Orianna.setRiotAPIKey("RGAPI-7285c537-1136-4084-9c07-4248750d135f");
         Orianna.setDefaultRegion(Region.NORTH_AMERICA);
 
         Summoner summoner = Orianna.summonerNamed("FatalElement").get();
