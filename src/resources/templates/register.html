@@ -32,7 +32,7 @@
                         <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" th:field="*{firstName}" placeholder="First Name"
+                        <input type="text" class="form-control" th:field="*{firstName}" placeholder="First Name" required
                                th:errorclass="is-invalid">
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -41,17 +41,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" th:field="*{lastName}" placeholder="Last Name"
-                               th:errorclass="is-invalid">
-
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" th:field="*{nickName}" placeholder="Nickname"
+                        <input type="text" class="form-control" th:field="*{lastName}" placeholder="Last Name" required
                                th:errorclass="is-invalid">
 
                         <div class="input-group-append">
@@ -61,7 +51,17 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" th:field="*{email}" placeholder="Email"
+                        <input type="text" class="form-control" th:field="*{nickName}" placeholder="Nickname" required
+                               th:errorclass="is-invalid">
+
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" th:field="*{email}" placeholder="Email" required
                                th:errorclass="is-invalid">
 
                         <div class="input-group-append">
@@ -76,7 +76,7 @@
                            <input placeholder="password" type="password" onChange="onChange()"
                                                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required
                                                     th:field="*{password}"/> </label><br/>
-                           <input placeholder="confirm" type="password" onChange="onChange()"/> </label><br/>
+                           <input placeholder="confirm" type="password" onChange="onChange()" required/> </label><br/>
                             <input type="submit"/>
                             <div class="input-group-append">
                                 <div class="input-group-text">
@@ -93,9 +93,6 @@
                                     I agree to the <a href="#">terms</a>
                                 </label>
                             </div>
-                        </div>
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Register</button>
                         </div>
                     </div>
                 </form>
