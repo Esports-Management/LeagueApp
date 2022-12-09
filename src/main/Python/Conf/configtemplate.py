@@ -12,5 +12,5 @@ class config:
         return cnx
 
     def getapikey(self):
-        api_key = 'RGAPI-7706a968-6aca-4fd4-af95-bb3e4aef04fc'
+        api_key = ''
         return api_key
