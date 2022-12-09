@@ -20,7 +20,6 @@ public class PlayerInMatch {
 
     public PlayerInMatch() {
     }
-
     public int getGameCode() {
         return gameCode;
     }
