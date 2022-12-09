@@ -17,6 +17,7 @@ def insert_to_match_statistics_table(match_statistics):
     if not table_found:
       mycursor.execute("CREATE TABLE match_statistics "
                        "(summonerName VARCHAR(255), matchID VARCHAR(255), "
+                       "gameDuration VARCHAR(12), championName VARCHAR(30), "
                        "kills INT(3), deaths INT(3), assists INT(3), "
                        "firstBloodKill BOOLEAN, goldEarned INT(10), "
                        "pentaKills INT(2), timeCCingOthers INT(3), "
@@ -24,29 +25,44 @@ def insert_to_match_statistics_table(match_statistics):
                        "totalMinionsKilled INT(10), visionScore INT(5))")
 
     query = ("INSERT INTO match_statistics "
-             "(summonerName, matchID, kills, deaths, assists, firstBloodKill, goldEarned, "
+             "(summonerName, matchID, gameDuration, championName, "
+             "kills, deaths, assists, firstBloodKill, goldEarned, "
              "pentaKills, timeCCingOthers, totalTimeCCDealt, totalDamageDealtToChampions, "
              "totalMinionsKilled, visionScore) "
-             "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
+             "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
 
     for summoner in match_statistics:
-        val = (
-            summoner,
-            match_statistics[summoner]['matchId'],
-            match_statistics[summoner]['kills'],
-            match_statistics[summoner]['deaths'],
-            match_statistics[summoner]['assists'],
-            match_statistics[summoner]['firstBloodKill'],
-            match_statistics[summoner]['goldEarned'],
-            match_statistics[summoner]['pentaKills'],
-            match_statistics[summoner]['timeCCingOthers'],
-            match_statistics[summoner]['totalTimeCCDealt'],
-            match_statistics[summoner]['totalDamageDealtToChampions'],
-            match_statistics[summoner]['totalMinionsKilled'],
-            match_statistics[summoner]['visionScore']
-        )
 
-        mycursor.execute(query, val)
-        cnx.commit()
-        
+        mycursor.execute(
+            "SELECT summonerName, matchID, COUNT(*) "
+            "FROM match_statistics "
+            "WHERE summonerName = %s AND matchID = %s"
+            "GROUP BY summonerName", (summoner, match_statistics[summoner]['matchId'],)
+        )
+        results = mycursor.fetchall()
+        row_count = mycursor.rowcount
+
+        if row_count == 0: # add row if row with this matchId and summonerName doesn't exist
+
+            val = (
+                summoner,
+                match_statistics[summoner]['matchId'],
+                match_statistics[summoner]['gameDuration'],
+                match_statistics[summoner]['championName'],
+                match_statistics[summoner]['kills'],
+                match_statistics[summoner]['deaths'],
+                match_statistics[summoner]['assists'],
+                match_statistics[summoner]['firstBloodKill'],
+                match_statistics[summoner]['goldEarned'],
+                match_statistics[summoner]['pentaKills'],
+                match_statistics[summoner]['timeCCingOthers'],
+                match_statistics[summoner]['totalTimeCCDealt'],
+                match_statistics[summoner]['totalDamageDealtToChampions'],
+                match_statistics[summoner]['totalMinionsKilled'],
+                match_statistics[summoner]['visionScore']
+            )
+
+            mycursor.execute(query, val)
+            cnx.commit()
+
     mycursor.close()

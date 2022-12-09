@@ -14,6 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 @Controller
 public class RegistrationController {
@@ -35,9 +42,7 @@ public class RegistrationController {
     public String userRegistration(
             @Valid UserData userData,
             BindingResult bindingResult,
-            Model model,
-            @RequestParam("email") String email){
-        System.out.println(userData.getEmail());
+            Model model){
         if(bindingResult.hasErrors()){
             model.addAttribute("registrationForm", userData);
             return "/register";
