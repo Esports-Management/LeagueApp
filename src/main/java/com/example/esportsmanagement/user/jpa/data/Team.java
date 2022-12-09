@@ -1,4 +1,7 @@
-package Data;
+package com.example.esportsmanagement.user.jpa.data;
+import com.example.esportsmanagement.user.jpa.data.Manager;
+import com.example.esportsmanagement.user.jpa.data.Player;
+
 import java.util.ArrayList;
 
 public class Team {

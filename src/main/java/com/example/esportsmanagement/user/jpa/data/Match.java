@@ -1,4 +1,4 @@
-package Data;
+package com.example.esportsmanagement.user.jpa.data;
 
 import java.util.ArrayList;
 

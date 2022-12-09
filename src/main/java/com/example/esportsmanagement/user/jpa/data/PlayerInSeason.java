@@ -1,4 +1,6 @@
-package Data;
+package com.example.esportsmanagement.user.jpa.data;
+
+import com.example.esportsmanagement.user.jpa.data.Player;
 
 public class PlayerInSeason {
     Player player;

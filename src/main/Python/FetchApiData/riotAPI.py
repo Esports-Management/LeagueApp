@@ -94,9 +94,6 @@ class Summoner:
                       )
 
 
-api_key = 'RGAPI-ecfce8dc-2400-4781-92b8-33959ee82433'
-
-
 api_key = config().getapikey()
 
 my_region = 'eun1'
@@ -116,6 +113,4 @@ summoner_1.get_challenger_by_queue_ranked_flex_sr(lol_watcher, my_region)
 match_id = 'EUN1_3257332892'
 
 match_info = summoner_1.get_match_info_by_match_id(lol_watcher, my_region, match_id)
-pprint.pprint(match_info)
-match_info = summoner_1.get_match_info_by_match_id(lol_watcher, my_region, 'EUN1_3257332892')
 pprint.pprint(match_info)

@@ -1,8 +1,8 @@
-package Data;
+package com.example.esportsmanagement.user.jpa.data;
 
 import java.util.ArrayList;
 
-public class Player extends User{
+public class Player extends UserEntity {
     ArrayList<String> summonerName;
     ArrayList<String> position;
     Team team;
