@@ -93,12 +93,12 @@ class Summoner:
                       self.queue[game_type]['tier']
                       )
 
-<<<<<<< HEAD
+
 api_key = 'RGAPI-ecfce8dc-2400-4781-92b8-33959ee82433'
-=======
+
 
 api_key = config().getapikey()
->>>>>>> feature/configcreatepython
+
 my_region = 'eun1'
 name = 'Ego the 1st'
 
