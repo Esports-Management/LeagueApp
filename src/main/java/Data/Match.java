@@ -3,15 +3,15 @@ package Data;
 import java.util.ArrayList;
 
 public class Match {
-    TournamentCode tournamentCode;
+    GameCode gameCode;
     Team teamA;
     Team teamB;
     ArrayList<PlayerInMatch> playersA;
     ArrayList<PlayerInMatch> playersB;
     long gameDuration;
 
-    public Match(TournamentCode tournamentCode, Team teamA, Team teamB, ArrayList<PlayerInMatch> playersA, ArrayList<PlayerInMatch> playersB, long gameDuration) {
-        this.tournamentCode = tournamentCode;
+    public Match(GameCode gameCode, Team teamA, Team teamB, ArrayList<PlayerInMatch> playersA, ArrayList<PlayerInMatch> playersB, long gameDuration) {
+        this.gameCode = gameCode;
         this.teamA = teamA;
         this.teamB = teamB;
         this.playersA = playersA;
@@ -19,33 +19,33 @@ public class Match {
         this.gameDuration = gameDuration;
     }
 
-    public Match(TournamentCode tournamentCode, Team teamA, Team teamB, ArrayList<PlayerInMatch> playersA, ArrayList<PlayerInMatch> playersB) {
-        this.tournamentCode = tournamentCode;
+    public Match(GameCode gameCode, Team teamA, Team teamB, ArrayList<PlayerInMatch> playersA, ArrayList<PlayerInMatch> playersB) {
+        this.gameCode = gameCode;
         this.teamA = teamA;
         this.teamB = teamB;
         this.playersA = playersA;
         this.playersB = playersB;
     }
 
-    public Match(TournamentCode tournamentCode, Team teamA, Team teamB) {
-        this.tournamentCode = tournamentCode;
+    public Match(GameCode gameCode, Team teamA, Team teamB) {
+        this.gameCode = gameCode;
         this.teamA = teamA;
         this.teamB = teamB;
     }
 
-    public Match(TournamentCode tournamentCode) {
-        this.tournamentCode = tournamentCode;
+    public Match(GameCode gameCode) {
+        this.gameCode = gameCode;
     }
 
     public Match() {
     }
 
-    public TournamentCode getTournamentCode() {
-        return tournamentCode;
+    public GameCode getTournamentCode() {
+        return gameCode;
     }
 
-    public void setTournamentCode(TournamentCode tournamentCode) {
-        this.tournamentCode = tournamentCode;
+    public void setTournamentCode(GameCode gameCode) {
+        this.gameCode = gameCode;
     }
 
     public Team getTeamA() {

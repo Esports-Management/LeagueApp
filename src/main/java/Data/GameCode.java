@@ -1,9 +1,9 @@
 package Data;
 
-public class TournamentCode {
+public class GameCode {
     String tournamentCode;
 
-    public TournamentCode(String tournamentCode) {
+    public GameCode(String tournamentCode) {
         this.tournamentCode = tournamentCode;
     }
 
