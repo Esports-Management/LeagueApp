@@ -2,6 +2,7 @@ import riotwatcher
 from datetime import datetime
 import pprint
 import APIToMySQL
+from src.main.Python.Conf.config import config
 
 
 class Summoner:
@@ -42,27 +43,27 @@ class Summoner:
             match_statistics.update({match_metadata['info']['participants'][i]['summonerName']: {}})
             match_statistics[match_metadata['info']['participants'][i]['summonerName']]['matchId'] = match_id
             match_statistics[match_metadata['info']['participants'][i]['summonerName']]['kills'] = \
-            match_metadata['info']['participants'][i]['kills']
+                match_metadata['info']['participants'][i]['kills']
             match_statistics[match_metadata['info']['participants'][i]['summonerName']]['deaths'] = \
-            match_metadata['info']['participants'][i]['deaths']
+                match_metadata['info']['participants'][i]['deaths']
             match_statistics[match_metadata['info']['participants'][i]['summonerName']]['assists'] = \
-            match_metadata['info']['participants'][i]['assists']
+                match_metadata['info']['participants'][i]['assists']
             match_statistics[match_metadata['info']['participants'][i]['summonerName']]['firstBloodKill'] = \
-            match_metadata['info']['participants'][i]['firstBloodKill']
+                match_metadata['info']['participants'][i]['firstBloodKill']
             match_statistics[match_metadata['info']['participants'][i]['summonerName']]['goldEarned'] = \
-            match_metadata['info']['participants'][i]['goldEarned']
+                match_metadata['info']['participants'][i]['goldEarned']
             match_statistics[match_metadata['info']['participants'][i]['summonerName']]['pentaKills'] = \
-            match_metadata['info']['participants'][i]['pentaKills']
+                match_metadata['info']['participants'][i]['pentaKills']
             match_statistics[match_metadata['info']['participants'][i]['summonerName']]['timeCCingOthers'] = \
-            match_metadata['info']['participants'][i]['timeCCingOthers']
+                match_metadata['info']['participants'][i]['timeCCingOthers']
             match_statistics[match_metadata['info']['participants'][i]['summonerName']]['totalTimeCCDealt'] = \
-            match_metadata['info']['participants'][i]['totalTimeCCDealt']
+                match_metadata['info']['participants'][i]['totalTimeCCDealt']
             match_statistics[match_metadata['info']['participants'][i]['summonerName']]['totalDamageDealtToChampions'] = \
-            match_metadata['info']['participants'][i]['totalDamageDealtToChampions']
+                match_metadata['info']['participants'][i]['totalDamageDealtToChampions']
             match_statistics[match_metadata['info']['participants'][i]['summonerName']]['totalMinionsKilled'] = \
-            match_metadata['info']['participants'][i]['totalMinionsKilled']
+                match_metadata['info']['participants'][i]['totalMinionsKilled']
             match_statistics[match_metadata['info']['participants'][i]['summonerName']]['visionScore'] = \
-            match_metadata['info']['participants'][i]['visionScore']
+                match_metadata['info']['participants'][i]['visionScore']
 
         APIToMySQL.insert_to_match_statistics_table(match_statistics)
         return match_statistics
@@ -92,7 +93,12 @@ class Summoner:
                       self.queue[game_type]['tier']
                       )
 
+<<<<<<< HEAD
 api_key = 'RGAPI-ecfce8dc-2400-4781-92b8-33959ee82433'
+=======
+
+api_key = config().getapikey()
+>>>>>>> feature/configcreatepython
 my_region = 'eun1'
 name = 'Ego the 1st'
 
