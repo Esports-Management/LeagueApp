@@ -1,11 +1,15 @@
-package Data;
+package com.example.esportsmanagement.user.jpa.data;
+
+import com.example.esportsmanagement.user.jpa.data.Player;
 
 public class PlayerInMatch {
+    int gameCode;
+    long gameDuration;
     Player player;
+    String champion;
     int kills;
     int deaths;
     int assists;
-    double kda;
     boolean firstBlood;
     int goldEarned;
     int pentaKills;
@@ -16,6 +20,20 @@ public class PlayerInMatch {
 
     public PlayerInMatch() {
     }
+    public int getGameCode() {
+        return gameCode;
+    }
+    public void setGameCode(int gameCode) {
+        this.gameCode = gameCode;
+    }
+
+    public long getGameDuration() {
+        return gameDuration;
+    }
+
+    public void setGameDuration(long gameDuration) {
+        this.gameDuration = gameDuration;
+    }
 
     public Player getPlayer() {
         return player;
@@ -23,6 +41,14 @@ public class PlayerInMatch {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public String getChampion() {
+        return champion;
+    }
+
+    public void setChampion(String champion) {
+        this.champion = champion;
     }
 
     public int getKills() {
@@ -47,14 +73,6 @@ public class PlayerInMatch {
 
     public void setAssists(int assists) {
         this.assists = assists;
-    }
-
-    public double getKda() {
-        return kda;
-    }
-
-    public void setKda(double kda) {
-        this.kda = kda;
     }
 
     public boolean isFirstBlood() {

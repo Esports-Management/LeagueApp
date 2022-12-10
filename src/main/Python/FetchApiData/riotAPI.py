@@ -2,6 +2,7 @@ import riotwatcher
 from datetime import datetime
 import APIToMySQL
 import sys
+from src.main.Python.Conf.config import config
 
 class Summoner:
 
@@ -32,7 +33,36 @@ class Summoner:
     def get_league_info(self, lol_watcher, region):
         self.league = lol_watcher.league.by_summoner(region=region, encrypted_summoner_id=self.id)
 
+        match_statistics = {}
 
+        # for i in range(len(match_metadata['info']['participants'])):
+        #     match_statistics.update({match_metadata['info']['participants'][i]['summonerName']: {}})
+        #     match_statistics[match_metadata['info']['participants'][i]['summonerName']]['matchId'] = match_id
+        #     match_statistics[match_metadata['info']['participants'][i]['summonerName']]['kills'] = \
+        #         match_metadata['info']['participants'][i]['kills']
+        #     match_statistics[match_metadata['info']['participants'][i]['summonerName']]['deaths'] = \
+        #         match_metadata['info']['participants'][i]['deaths']
+        #     match_statistics[match_metadata['info']['participants'][i]['summonerName']]['assists'] = \
+        #         match_metadata['info']['participants'][i]['assists']
+        #     match_statistics[match_metadata['info']['participants'][i]['summonerName']]['firstBloodKill'] = \
+        #         match_metadata['info']['participants'][i]['firstBloodKill']
+        #     match_statistics[match_metadata['info']['participants'][i]['summonerName']]['goldEarned'] = \
+        #         match_metadata['info']['participants'][i]['goldEarned']
+        #     match_statistics[match_metadata['info']['participants'][i]['summonerName']]['pentaKills'] = \
+        #         match_metadata['info']['participants'][i]['pentaKills']
+        #     match_statistics[match_metadata['info']['participants'][i]['summonerName']]['timeCCingOthers'] = \
+        #         match_metadata['info']['participants'][i]['timeCCingOthers']
+        #     match_statistics[match_metadata['info']['participants'][i]['summonerName']]['totalTimeCCDealt'] = \
+        #         match_metadata['info']['participants'][i]['totalTimeCCDealt']
+        #     match_statistics[match_metadata['info']['participants'][i]['summonerName']]['totalDamageDealtToChampions'] = \
+        #         match_metadata['info']['participants'][i]['totalDamageDealtToChampions']
+        #     match_statistics[match_metadata['info']['participants'][i]['summonerName']]['totalMinionsKilled'] = \
+        #         match_metadata['info']['participants'][i]['totalMinionsKilled']
+        #     match_statistics[match_metadata['info']['participants'][i]['summonerName']]['visionScore'] = \
+        #         match_metadata['info']['participants'][i]['visionScore']
+
+        APIToMySQL.insert_to_match_statistics_table(match_statistics)
+        return match_statistics
 
     def get_leagues_player_is_in(self):
         for queue in self.queue:
@@ -117,7 +147,8 @@ def get_match_info_by_match_id(watcher, region, match_id):
     APIToMySQL.insert_to_match_statistics_table(match_statistics) #attempting to write match stats to DB
     return match_statistics
 
-api_key = ''
+api_key = config().getapikey()
+
 my_region = 'eun1'
 name = 'Ego the 1st'
 
@@ -139,4 +170,3 @@ region = sys.argv[1]
 match_id = sys.argv[2]
 
 get_match_info_by_match_id(lol_watcher, region, match_id) # getting match statistics
-

@@ -1,19 +1,21 @@
-package Data;
+package com.example.esportsmanagement.user.jpa.data;
+
+import com.example.esportsmanagement.user.jpa.data.Team;
 
 import java.util.ArrayList;
 
 public class TeamInMatch {
     Team team;
-    ArrayList<Champion> bans;
+    ArrayList<String> bans;
     boolean win;
 
-    public TeamInMatch(Team team, ArrayList<Champion> bans, boolean win) {
+    public TeamInMatch(Team team, ArrayList<String> bans, boolean win) {
         this.team = team;
         this.bans = bans;
         this.win = win;
     }
 
-    public TeamInMatch(Team team, ArrayList<Champion> bans) {
+    public TeamInMatch(Team team, ArrayList<String> bans) {
         this.team = team;
         this.bans = bans;
     }
@@ -33,11 +35,11 @@ public class TeamInMatch {
         this.team = team;
     }
 
-    public ArrayList<Champion> getBans() {
+    public ArrayList<String> getBans() {
         return bans;
     }
 
-    public void setBans(ArrayList<Champion> bans) {
+    public void setBans(ArrayList<String> bans) {
         this.bans = bans;
     }
 

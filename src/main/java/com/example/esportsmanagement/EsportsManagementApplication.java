@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 public class EsportsManagementApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(EsportsManagementApplication.class, args);
-    }
+        SpringApplication.run(EsportsManagementApplication.class, args);    }
 
 }
