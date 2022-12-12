@@ -1,6 +1,5 @@
 package com.example.esportsmanagement.web.security;
 
-import com.example.esportsmanagement.user.DefaultUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
