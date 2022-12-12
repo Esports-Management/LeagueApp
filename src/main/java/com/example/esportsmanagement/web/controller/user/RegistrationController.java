@@ -1,8 +1,7 @@
 package com.example.esportsmanagement.web.controller.user;
 
 import com.example.esportsmanagement.exceptions.EmailTakenException;
-import com.example.esportsmanagement.exceptions.NickNameTakenException;
-import com.example.esportsmanagement.user.jpa.data.UserService;
+import com.example.esportsmanagement.exceptions.UserNameTakenException;
 import com.example.esportsmanagement.user.DefaultUserService;
 import com.example.esportsmanagement.web.data.user.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
 
 @Controller
 public class RegistrationController {
@@ -49,9 +40,9 @@ public class RegistrationController {
         }
         try {
             defaultUserService.register(userData);
-        }catch (NickNameTakenException e){
+        }catch (UserNameTakenException e){
             System.out.println(e);
-            bindingResult.rejectValue("nickName", "userData.nickName", e.getMessage());
+            bindingResult.rejectValue("userName", "userData.userName", e.getMessage());
             model.addAttribute("registrationForm", userData);
             return "/register";
         } catch (EmailTakenException e) {
@@ -62,4 +53,6 @@ public class RegistrationController {
         }
         return "/registrationSuccess";
     }
+
+
 }
