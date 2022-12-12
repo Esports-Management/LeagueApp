@@ -7,16 +7,16 @@
 </head>
 <body>
 
-    <form action="#" th:action="@{/find}" method="post">
-        Match ID: <input type="text" name="match_id" field="*{match_id}">
-        <br>
-        <label for="region">Region:</label>
-        <select id=region field="*{region}" name="region">
-            <option value="eun1" selected>Europe North</option>
-            <option value="euw1">Europe West</option>
-        </select>
-        <br>
-        <input type="submit" value="Submit">
-    </form>
+<form action="#" th:action="@{/find}" method="post">
+    Match ID: <input type="text" name="match_id" field="*{match_id}">
+    <br>
+    <label for="region">Region:</label>
+    <select id=region field="*{region}" name="region">
+        <option value="eun1" selected>Europe North</option>
+        <option value="euw1">Europe West</option>
+    </select>
+    <br>
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>

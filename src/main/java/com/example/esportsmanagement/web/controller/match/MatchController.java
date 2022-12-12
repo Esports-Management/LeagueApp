@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 @Controller
 public class MatchController {
     @GetMapping("/find")
-    public String find(Model model){
+    public String find(){
         return "/find";
     }
 
