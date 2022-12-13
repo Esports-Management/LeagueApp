@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Match List</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th> Matches </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${match_statistics.empty}">
+        <td colspan="2"> No match stats found </td>
+    </tr>
+    <tr th:each="match : ${match_list}">
+        <td>
+            <a href="#"><span th:text="${match}"> Match ID </span></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
