@@ -2,7 +2,8 @@ import riotwatcher
 from datetime import datetime
 import APIToMySQL
 import sys
-from src.main.Python.Conf.config import config
+from config import getapikey
+
 
 class Summoner:
 
@@ -89,20 +90,22 @@ class Summoner:
                       self.queue[game_type]['tier']
                       )
 
+
 def get_match_info_by_match_id(watcher, region, match_id):
     match_metadata = watcher.match.by_id(region, match_id)
 
     match_statistics = {}
 
-    game_length_minutes = match_metadata['info']['gameDuration']//60
-    game_length_seconds = match_metadata['info']['gameDuration']%60
+    game_length_minutes = match_metadata['info']['gameDuration'] // 60
+    game_length_seconds = match_metadata['info']['gameDuration'] % 60
 
     game_length_minutes_and_seconds = str(game_length_minutes) + "min. " + str(game_length_seconds) + 'sec.'
 
     for i in range(len(match_metadata['info']['participants'])):
-        match_statistics.update({match_metadata['info']['participants'][i]['summonerName']: {}}) #create a hashmap entry for player i
+        match_statistics.update(
+            {match_metadata['info']['participants'][i]['summonerName']: {}})  # create a hashmap entry for player i
 
-        #fill out the hashmap with stats of player i
+        # fill out the hashmap with stats of player i
         match_statistics[match_metadata['info']['participants'][i]['summonerName']]['matchId'] = match_id
 
         match_statistics[match_metadata['info']['participants'][i]['summonerName']]['gameDuration'] = \
@@ -144,10 +147,11 @@ def get_match_info_by_match_id(watcher, region, match_id):
         match_statistics[match_metadata['info']['participants'][i]['summonerName']]['visionScore'] = \
             match_metadata['info']['participants'][i]['visionScore']
 
-    APIToMySQL.insert_to_match_statistics_table(match_statistics) #attempting to write match stats to DB
+    APIToMySQL.insert_to_match_statistics_table(match_statistics)  # attempting to write match stats to DB
     return match_statistics
 
-api_key = config().getapikey()
+
+api_key = getapikey()
 
 my_region = 'eun1'
 name = 'Ego the 1st'
@@ -163,10 +167,10 @@ lol_watcher = riotwatcher.LolWatcher(api_key, default_status_v4=True)
 # summoner_1.get_challenger_by_queue_ranked_solo_5x5(lol_watcher, my_region)
 # summoner_1.get_challenger_by_queue_ranked_flex_sr(lol_watcher, my_region)
 
-#match_id = 'EUN1_3257332892'
-#EUN1_3271040467
+# match_id = 'EUN1_3257332892'
+# EUN1_3271040467
 
 region = sys.argv[1]
 match_id = sys.argv[2]
 
-get_match_info_by_match_id(lol_watcher, region, match_id) # getting match statistics
+get_match_info_by_match_id(lol_watcher, region, match_id)  # getting match statistics

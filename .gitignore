@@ -4,7 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 /src/resources/application.properties
-/src/main/Python/Conf/config.py
+/src/main/Python/FetchApiData/config.py
 src/main/java/com/example/esportsmanagement/web/controller/match/configforpython.java
 
 ### STS ###

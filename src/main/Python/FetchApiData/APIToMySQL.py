@@ -1,5 +1,4 @@
-import mysql.connector
-from src.main.Python.Conf.config import config
+from config import getconfig
 
 
 def insert_to_match_statistics_table(match_statistics):
@@ -7,7 +6,7 @@ def insert_to_match_statistics_table(match_statistics):
     #                              user="root",
     #                            password="",
     #                            database="users_db")
-    cnx = config().getconfig()
+    cnx = getconfig()
 
     mycursor = cnx.cursor()
     table_found = False
