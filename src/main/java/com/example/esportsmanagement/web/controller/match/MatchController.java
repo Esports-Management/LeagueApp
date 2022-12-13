@@ -22,7 +22,7 @@ public class MatchController {
             @RequestParam("region") String region
             ) throws Exception {
         try {
-            ProcessBuilder pb = new ProcessBuilder("src\\main\\Python\\venv\\Scripts\\python",
+            ProcessBuilder pb = new ProcessBuilder(configforpython.getConfig(),
                     "src\\main\\Python\\FetchApiData\\riotAPI.py", region, match_id
             );
             Process p = pb.start();
