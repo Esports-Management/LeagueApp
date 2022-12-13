@@ -71,7 +71,6 @@ public class MatchController {
                 match_id_set.add(match_entity.getMatchId());
             }
         }
-        System.out.println(match_id_set.size());
 
         model.addAttribute("match_list", match_id_set);
         return "/matchlist";

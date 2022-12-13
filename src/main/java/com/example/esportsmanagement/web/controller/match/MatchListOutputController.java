@@ -62,7 +62,6 @@ public class MatchListOutputController {
         for (Object element : all_players_in_match) {
             if (element instanceof MatchDataEntity) {
                 MatchDataEntity elementD = (MatchDataEntity) element;
-                System.out.println(elementD.getMatchId());
             }
         }
         return MatchDataResponse.<MatchDataEntity>builder()
