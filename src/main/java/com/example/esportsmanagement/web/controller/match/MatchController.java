@@ -1,5 +1,7 @@
 package com.example.esportsmanagement.web.controller.match;
 
+import com.example.esportsmanagement.user.jpa.data.MatchDataEntity;
+import com.example.esportsmanagement.user.jpa.data.MatchDataService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 public class MatchController {
@@ -43,5 +48,31 @@ public class MatchController {
 
 
         return "/find";
+    }
+
+    private MatchDataService matchDataService;
+
+
+    public MatchController(MatchDataService matchDataService) {
+        this.matchDataService = matchDataService;
+    }
+
+
+    @GetMapping(path = "/matchlist")
+    public String showAllMatches(Model model) {
+        Set<String> match_id_set = new HashSet<String>();
+        List allMatches = matchDataService.findAllMatches();
+        for (Object match : allMatches) {
+            if (match instanceof MatchDataEntity) {
+                MatchDataEntity match_entity = (MatchDataEntity) match;
+                // we can put the whole match object with all stats here,
+                // just need change set from Set<String> to Set<MatchDataEntity>
+                // and change template to output necessary match info
+                match_id_set.add(match_entity.getMatchId());
+            }
+        }
+
+        model.addAttribute("match_list", match_id_set);
+        return "/matchlist";
     }
 }

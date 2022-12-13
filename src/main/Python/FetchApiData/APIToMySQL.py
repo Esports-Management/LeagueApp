@@ -20,28 +20,31 @@ def insert_to_match_statistics_table(match_statistics):
     if not table_found:
 
       mycursor.execute("CREATE TABLE match_statistics "
-                       "(summonerName VARCHAR(255), matchID VARCHAR(255), "
-                       "gameDuration VARCHAR(12), championName VARCHAR(30), "
+                       "(id BIGINT(20) AUTO_INCREMENT PRIMARY KEY, summoner_name VARCHAR(255), match_id VARCHAR(255), "
+                       "game_duration VARCHAR(12), champion_name VARCHAR(30), "
                        "kills INT(3), deaths INT(3), assists INT(3), "
-                       "firstBloodKill BOOLEAN, goldEarned INT(10), "
-                       "pentaKills INT(2), timeCCingOthers INT(3), "
-                       "totalTimeCCDealt INT(10), totalDamageDealtToChampions INT(20), "
-                       "totalMinionsKilled INT(10), visionScore INT(5))")
+                       "first_blood_kill BOOLEAN, gold_earned INT(10), "
+                       "penta_kills INT(2), time_ccing_others INT(3), "
+                       "total_time_cc_dealt INT(10), total_damage_dealt_to_champions INT(20), "
+                       "total_minions_killed INT(10), vision_score INT(5))")
 
     query = ("INSERT INTO match_statistics "
-             "(summonerName, matchID, gameDuration, championName, "
-             "kills, deaths, assists, firstBloodKill, goldEarned, "
-             "pentaKills, timeCCingOthers, totalTimeCCDealt, totalDamageDealtToChampions, "
-             "totalMinionsKilled, visionScore) "
-             "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
+             "(id, summoner_name, match_id, game_duration, champion_name, "
+             "kills, deaths, assists, first_blood_kill, gold_earned, "
+             "penta_kills, time_ccing_others, total_time_cc_dealt, total_damage_dealt_to_champions, "
+             "total_minions_killed, vision_score) "
+             "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
 
     for summoner in match_statistics:
+        mycursor.execute("SELECT * FROM match_statistics ")
+        results = mycursor.fetchall()
+        last_row_id = mycursor.rowcount
 
         mycursor.execute(
-            "SELECT summonerName, matchID, COUNT(*) "
+            "SELECT summoner_name, match_id, COUNT(*) "
             "FROM match_statistics "
-            "WHERE summonerName = %s AND matchID = %s"
-            "GROUP BY summonerName", (summoner, match_statistics[summoner]['matchId'],)
+            "WHERE summoner_name = %s AND match_id = %s"
+            "GROUP BY summoner_name", (summoner, match_statistics[summoner]['matchId'],)
         )
         results = mycursor.fetchall()
         row_count = mycursor.rowcount
@@ -49,6 +52,7 @@ def insert_to_match_statistics_table(match_statistics):
         if row_count == 0: # add row if row with this matchId and summonerName doesn't exist
 
             val = (
+                last_row_id,
                 summoner,
                 match_statistics[summoner]['matchId'],
                 match_statistics[summoner]['gameDuration'],
