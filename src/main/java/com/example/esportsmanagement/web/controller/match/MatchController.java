@@ -26,25 +26,25 @@ public class MatchController {
             @RequestParam("match_id") String match_id,
             @RequestParam("region") String region
             ) throws Exception {
-        try {
-            ProcessBuilder pb = new ProcessBuilder(configforpython.getConfig(),
-                    "src\\main\\Python\\FetchApiData\\riotAPI.py", region, match_id
-            );
-            Process p = pb.start();
-            p.waitFor();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            BufferedReader errorReader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+            try {
+                ProcessBuilder pb = new ProcessBuilder(configforpython.getConfig(),
+                        "src\\main\\Python\\FetchApiData\\riotAPI.py", region, match_id
+                );
+                Process p = pb.start();
+                p.waitFor();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                BufferedReader errorReader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
+                while ((line = errorReader.readLine()) != null) {
+                    System.out.println(line);
+                }
+                System.out.println("All went well");
+            } catch (Exception e) {
+                System.out.println(e);
             }
-            while ((line = errorReader.readLine()) != null) {
-                System.out.println(line);
-            }
-            System.out.println("All went well");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
 
 
         return "/find";

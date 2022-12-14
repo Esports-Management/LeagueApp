@@ -1,6 +1,7 @@
 import riotwatcher
 from datetime import datetime
 import APIToMySQL
+from requests import HTTPError
 import sys
 from config import getapikey
 
@@ -92,63 +93,76 @@ class Summoner:
 
 
 def get_match_info_by_match_id(watcher, region, match_id):
-    match_metadata = watcher.match.by_id(region, match_id)
 
-    match_statistics = {}
+    if len(match_id) > 15:
+        match_ids_without_commas = match_id.replace(", ", " ")
+        match_ids_without_commas_with_spaces = match_ids_without_commas.replace(",", " ")
+        match_id_list = match_ids_without_commas_with_spaces.split(" ")
 
-    game_length_minutes = match_metadata['info']['gameDuration'] // 60
-    game_length_seconds = match_metadata['info']['gameDuration'] % 60
+        for match_id_element in match_id_list:
+            get_match_info_by_match_id(lol_watcher, region, match_id_element)
 
-    game_length_minutes_and_seconds = str(game_length_minutes) + "min. " + str(game_length_seconds) + 'sec.'
+    try:
+        match_metadata = watcher.match.by_id(region, match_id)
 
-    for i in range(len(match_metadata['info']['participants'])):
-        match_statistics.update(
-            {match_metadata['info']['participants'][i]['summonerName']: {}})  # create a hashmap entry for player i
+        match_statistics = {}
 
-        # fill out the hashmap with stats of player i
-        match_statistics[match_metadata['info']['participants'][i]['summonerName']]['matchId'] = match_id
+        game_length_minutes = match_metadata['info']['gameDuration'] // 60
+        game_length_seconds = match_metadata['info']['gameDuration'] % 60
 
-        match_statistics[match_metadata['info']['participants'][i]['summonerName']]['gameDuration'] = \
-            game_length_minutes_and_seconds
+        game_length_minutes_and_seconds = str(game_length_minutes) + "min. " + str(game_length_seconds) + 'sec.'
 
-        match_statistics[match_metadata['info']['participants'][i]['summonerName']]['championName'] = \
-            match_metadata['info']['participants'][i]['championName']
+        for i in range(len(match_metadata['info']['participants'])):
+            match_statistics.update(
+                {match_metadata['info']['participants'][i]['summonerName']: {}})  # create a hashmap entry for player i
 
-        match_statistics[match_metadata['info']['participants'][i]['summonerName']]['kills'] = \
-            match_metadata['info']['participants'][i]['kills']
+            # fill out the hashmap with stats of player i
+            match_statistics[match_metadata['info']['participants'][i]['summonerName']]['matchId'] = match_id
 
-        match_statistics[match_metadata['info']['participants'][i]['summonerName']]['deaths'] = \
-            match_metadata['info']['participants'][i]['deaths']
+            match_statistics[match_metadata['info']['participants'][i]['summonerName']]['gameDuration'] = \
+                game_length_minutes_and_seconds
 
-        match_statistics[match_metadata['info']['participants'][i]['summonerName']]['assists'] = \
-            match_metadata['info']['participants'][i]['assists']
+            match_statistics[match_metadata['info']['participants'][i]['summonerName']]['championName'] = \
+                match_metadata['info']['participants'][i]['championName']
 
-        match_statistics[match_metadata['info']['participants'][i]['summonerName']]['firstBloodKill'] = \
-            match_metadata['info']['participants'][i]['firstBloodKill']
+            match_statistics[match_metadata['info']['participants'][i]['summonerName']]['kills'] = \
+                match_metadata['info']['participants'][i]['kills']
 
-        match_statistics[match_metadata['info']['participants'][i]['summonerName']]['goldEarned'] = \
-            match_metadata['info']['participants'][i]['goldEarned']
+            match_statistics[match_metadata['info']['participants'][i]['summonerName']]['deaths'] = \
+                match_metadata['info']['participants'][i]['deaths']
 
-        match_statistics[match_metadata['info']['participants'][i]['summonerName']]['pentaKills'] = \
-            match_metadata['info']['participants'][i]['pentaKills']
+            match_statistics[match_metadata['info']['participants'][i]['summonerName']]['assists'] = \
+                match_metadata['info']['participants'][i]['assists']
 
-        match_statistics[match_metadata['info']['participants'][i]['summonerName']]['timeCCingOthers'] = \
-            match_metadata['info']['participants'][i]['timeCCingOthers']
+            match_statistics[match_metadata['info']['participants'][i]['summonerName']]['firstBloodKill'] = \
+                match_metadata['info']['participants'][i]['firstBloodKill']
 
-        match_statistics[match_metadata['info']['participants'][i]['summonerName']]['totalTimeCCDealt'] = \
-            match_metadata['info']['participants'][i]['totalTimeCCDealt']
+            match_statistics[match_metadata['info']['participants'][i]['summonerName']]['goldEarned'] = \
+                match_metadata['info']['participants'][i]['goldEarned']
 
-        match_statistics[match_metadata['info']['participants'][i]['summonerName']]['totalDamageDealtToChampions'] = \
-            match_metadata['info']['participants'][i]['totalDamageDealtToChampions']
+            match_statistics[match_metadata['info']['participants'][i]['summonerName']]['pentaKills'] = \
+                match_metadata['info']['participants'][i]['pentaKills']
 
-        match_statistics[match_metadata['info']['participants'][i]['summonerName']]['totalMinionsKilled'] = \
-            match_metadata['info']['participants'][i]['totalMinionsKilled']
+            match_statistics[match_metadata['info']['participants'][i]['summonerName']]['timeCCingOthers'] = \
+                match_metadata['info']['participants'][i]['timeCCingOthers']
 
-        match_statistics[match_metadata['info']['participants'][i]['summonerName']]['visionScore'] = \
-            match_metadata['info']['participants'][i]['visionScore']
+            match_statistics[match_metadata['info']['participants'][i]['summonerName']]['totalTimeCCDealt'] = \
+                match_metadata['info']['participants'][i]['totalTimeCCDealt']
 
-    APIToMySQL.insert_to_match_statistics_table(match_statistics)  # attempting to write match stats to DB
-    return match_statistics
+            match_statistics[match_metadata['info']['participants'][i]['summonerName']]['totalDamageDealtToChampions'] = \
+                match_metadata['info']['participants'][i]['totalDamageDealtToChampions']
+
+            match_statistics[match_metadata['info']['participants'][i]['summonerName']]['totalMinionsKilled'] = \
+                match_metadata['info']['participants'][i]['totalMinionsKilled']
+
+            match_statistics[match_metadata['info']['participants'][i]['summonerName']]['visionScore'] = \
+                match_metadata['info']['participants'][i]['visionScore']
+
+        APIToMySQL.insert_to_match_statistics_table(match_statistics)  # attempting to write match stats to DB
+
+    except HTTPError as error_message:
+        print(f"Match id {match_id} not found: " + str(error_message))
+
 
 
 api_key = getapikey()
