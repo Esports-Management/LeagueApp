@@ -4,15 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Search match statistics by game code</title>
-    <link rel="stylesheet" href="/css/style.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/buttons.css" type="text/css"/>
 </head>
 <body>
 
 <div class="centered-container">
+
     <div class="header">
-            Please provide a valid Match ID and choose the correct server.
+        Please provide a valid Match ID and choose the correct server.
     </div>
-    <div class="content">
+    <div class="content" >
         <form action="#" th:action="@{/find}" method="post">
             Match ID: <input type="text" name="match_id" field="*{match_id}">
             <br>
@@ -25,12 +26,28 @@
             <input type="submit" value="Submit">
         </form>
     </div>
+
+        <img class="centered-container-image" src="static/img/fizzlol.jpg" th:src="@{img/fizzlol.jpg}">
+
+
 </div>
 
-
-
-<div>
-
+<div class="wrapper">
+    <div><span class="dot"></span></div>
+    <div><span class="dot"></span></div>
+    <div><span class="dot"></span></div>
+    <div><span class="dot"></span></div>
+    <div><span class="dot"></span></div>
+    <div><span class="dot"></span></div>
+    <div><span class="dot"></span></div>
+    <div><span class="dot"></span></div>
+    <div><span class="dot"></span></div>
+    <div><span class="dot"></span></div>
+    <div><span class="dot"></span></div>
+    <div><span class="dot"></span></div>
+    <div><span class="dot"></span></div>
+    <div><span class="dot"></span></div>
+    <div><span class="dot"></span></div>
 </div>
 </body>
 </html>
