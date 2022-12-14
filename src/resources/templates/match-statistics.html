@@ -28,7 +28,7 @@
     <tbody>
     <tr th:each="player_stats : ${match_statistics}">
         <td>
-            <span th:text="${player_stats.summonerName}"></span>
+            <a th:href="@{/player-statistics(username=${player_stats.summonerName})}"><span th:text="${player_stats.summonerName}"></span></a>
         </td>
 
         <td>

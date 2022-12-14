@@ -43,7 +43,7 @@ public class ManageDatabase {
     public static void createPlayerStatsTable(Connection connection){
         String sql = "CREATE TABLE IF NOT EXISTS player_statistics (" +
                 "username VARCHAR(255) PRIMARY KEY," +
-                " gamesPlayed INT," +
+                " games_played INT," +
                 " kills INT," +
                 " deaths INT," +
                 " assists INT," +
@@ -83,7 +83,7 @@ public class ManageDatabase {
             Statement statement = connection.createStatement();
             statistics = statement.executeQuery(sql);
             while(results.next()){
-                updateStatsByColumn(connection, statement, results, "gamesPlayed");
+                updateStatsByColumn(connection, statement, results, "games_played");
                 updateStatsByColumn(connection, statement, results, "kills");
                 updateStatsByColumn(connection, statement, results, "deaths");
                 updateStatsByColumn(connection, statement, results, "assists");
@@ -102,7 +102,7 @@ public class ManageDatabase {
             String sql = "SELECT " + column + " FROM player_statistics WHERE username = \"" + results.getString("summoner_name") + "\"";
             ResultSet tempRS = statement.executeQuery(sql);
             tempRS.next();
-            if(column == "gamesPlayed"){
+            if(column == "games_played"){
                 tempInt = tempRS.getInt(column) + 1;
             }
             else{

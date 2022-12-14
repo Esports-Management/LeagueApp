@@ -1,6 +1,6 @@
 package com.example.esportsmanagement.user.jpa.repository;
 
-import com.example.esportsmanagement.user.jpa.data.UserEntity;
+import com.example.esportsmanagement.user.jpa.data.user.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.example.esportsmanagement.user.jpa.data;
+package com.example.esportsmanagement.user.jpa.data.user;
 
 import com.example.esportsmanagement.web.data.user.UserData;
 import org.springframework.stereotype.Service;

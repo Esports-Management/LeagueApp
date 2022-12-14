@@ -1,4 +1,4 @@
-package com.example.esportsmanagement.user.jpa.data;
+package com.example.esportsmanagement.user.jpa.data.match;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.example.esportsmanagement.user.jpa.data;
+package com.example.esportsmanagement.user.jpa.data.match;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
