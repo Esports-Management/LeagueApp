@@ -1,5 +1,7 @@
 package com.example.esportsmanagement.user.jpa.data;
 
+import com.example.esportsmanagement.user.jpa.data.user.UserEntity;
+
 public class Manager extends UserEntity {
     Team team;
 

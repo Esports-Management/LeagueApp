@@ -1,4 +1,4 @@
-package com.example.esportsmanagement.user.jpa.data;
+package com.example.esportsmanagement.user.jpa.data.user;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;

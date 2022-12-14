@@ -1,10 +1,10 @@
-package com.example.esportsmanagement.user.jpa.data;
+package com.example.esportsmanagement.user.jpa.data.match;
 
 import com.example.esportsmanagement.user.jpa.repository.MatchDataRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
+
 @Component
 public class MatchDataService {
 

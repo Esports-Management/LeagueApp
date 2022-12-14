@@ -2,8 +2,8 @@ package com.example.esportsmanagement.user;
 
 import com.example.esportsmanagement.exceptions.EmailTakenException;
 import com.example.esportsmanagement.exceptions.UserNameTakenException;
-import com.example.esportsmanagement.user.jpa.data.UserEntity;
-import com.example.esportsmanagement.user.jpa.data.UserService;
+import com.example.esportsmanagement.user.jpa.data.user.UserEntity;
+import com.example.esportsmanagement.user.jpa.data.user.UserService;
 import com.example.esportsmanagement.user.jpa.repository.UserRepository;
 import com.example.esportsmanagement.web.data.user.UserData;
 import org.apache.catalina.Role;

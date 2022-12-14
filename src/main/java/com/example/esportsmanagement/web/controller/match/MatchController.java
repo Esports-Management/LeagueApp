@@ -1,17 +1,12 @@
 package com.example.esportsmanagement.web.controller.match;
 
-import com.example.esportsmanagement.user.jpa.data.MatchDataEntity;
-import com.example.esportsmanagement.user.jpa.data.MatchDataResponse;
-import com.example.esportsmanagement.user.jpa.data.MatchDataService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.example.esportsmanagement.user.jpa.data.match.MatchDataEntity;
+import com.example.esportsmanagement.user.jpa.data.match.MatchDataService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
