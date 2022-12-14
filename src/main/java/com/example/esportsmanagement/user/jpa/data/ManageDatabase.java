@@ -17,7 +17,7 @@ public class ManageDatabase {
         Connection connection = null;
         try
         {
-            String url = "jdbc:mysql://localhost:3306/Users_db?user=root";
+            String url = "jdbc:mysql://localhost:8889/Users_db?user=root";
             connection = DriverManager.getConnection(url);
             System.out.println("Connected to the database");
         }

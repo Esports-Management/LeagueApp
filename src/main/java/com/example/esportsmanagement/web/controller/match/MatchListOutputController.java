@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -59,9 +60,11 @@ public class MatchListOutputController {
     @GetMapping(path = "/getMatchId")
     public MatchDataResponse<MatchDataEntity> getMatchId(@RequestParam("match_id") String match_id) {
         List all_players_in_match = matchDataService.findMatchByMatchId(match_id);
+        List<MatchDataEntity> match_statistics = new ArrayList<MatchDataEntity>();
         for (Object element : all_players_in_match) {
             if (element instanceof MatchDataEntity) {
                 MatchDataEntity elementD = (MatchDataEntity) element;
+                match_statistics.add(elementD);
             }
         }
         return MatchDataResponse.<MatchDataEntity>builder()

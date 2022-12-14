@@ -101,6 +101,7 @@ def get_match_info_by_match_id(watcher, region, match_id):
 
         for match_id_element in match_id_list:
             get_match_info_by_match_id(lol_watcher, region, match_id_element)
+        return
 
     try:
         match_metadata = watcher.match.by_id(region, match_id)
@@ -164,7 +165,6 @@ def get_match_info_by_match_id(watcher, region, match_id):
         print(f"Match id {match_id} not found: " + str(error_message))
 
 
-
 api_key = getapikey()
 
 my_region = 'eun1'
@@ -172,19 +172,7 @@ name = 'Ego the 1st'
 
 lol_watcher = riotwatcher.LolWatcher(api_key, default_status_v4=True)
 
-# summoner = lol_watcher.summoner.by_name(my_region, name)
-#
-# summoner_1 = Summoner(summoner)
-# summoner_1.get_match_list(lol_watcher, my_region)
-# summoner_1.get_league_info(lol_watcher, my_region)
-#
-# summoner_1.get_challenger_by_queue_ranked_solo_5x5(lol_watcher, my_region)
-# summoner_1.get_challenger_by_queue_ranked_flex_sr(lol_watcher, my_region)
+region_input = sys.argv[1]
+match_id_input = sys.argv[2]
 
-# match_id = 'EUN1_3257332892'
-# EUN1_3271040467
-
-region = sys.argv[1]
-match_id = sys.argv[2]
-
-get_match_info_by_match_id(lol_watcher, region, match_id)  # getting match statistics
+get_match_info_by_match_id(lol_watcher, region_input, match_id_input)  # getting match statistics

@@ -18,7 +18,7 @@
     </tr>
     <tr th:each="match : ${match_list}">
         <td>
-            <a href="#"><span th:text="${match}"> Match ID </span></a>
+            <a th:href="@{/match-statistics(id=${match})}"><span th:text="${match}"></span></a>
         </td>
     </tr>
     </tbody>

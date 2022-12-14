@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="ISO-8859-1" />
+    <title>Match statistics</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th> Summoner Name </th>
+        <th> Kills </th>
+        <th> Deaths </th>
+        <th> Assists </th>
+        <th> Game Duration </th>
+        <th> Champion Name </th>
+        <th> First Blood Kill </th>
+        <th> Gold Earned </th>
+        <th> Penta Kills </th>
+        <th> Time CCing Others </th>
+        <th> Total Time CC Dealt </th>
+        <th> Total Damage Dealt to Champions </th>
+        <th> Total Minions Killed </th>
+        <th> Vision Score </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="player_stats : ${match_statistics}">
+        <td>
+            <span th:text="${player_stats.summonerName}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.kills}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.deaths}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.assists}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.gameDuration}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.championName}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.firstBloodKill} ? 'Yes' : 'No'"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.goldEarned}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.pentaKills}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.timeCCingOthers}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.totalTimeCCDealt}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.totalDamageDealtToChampions}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.totalMinionsKilled}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.visionScore}"></span>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
