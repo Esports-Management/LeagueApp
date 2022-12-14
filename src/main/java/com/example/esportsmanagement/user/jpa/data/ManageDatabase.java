@@ -1,25 +1,27 @@
 package com.example.esportsmanagement.user.jpa.data;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ManageDatabase {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Connection connection = connect();
-        insertData("Test5", connection);
+        createPlayerStatsTable(connection);
+        createPlayersInTable(connection);
+        updateStats(connection);
+        if(connection != null) {
+            connection.close();
+            System.out.println("Disconnected from the database");
+        }
     }
-    public static void insertInto(String table){
 
-    }
     public static Connection connect(){
         Connection connection = null;
         try
         {
             String url = "jdbc:mysql://localhost:3306/Users_db?user=root";
             connection = DriverManager.getConnection(url);
+            System.out.println("Connected to the database");
         }
         catch(SQLException e){
             System.out.println(e.getMessage());
@@ -28,15 +30,96 @@ public class ManageDatabase {
         return connection;
     }
 
-    public static void insertData(String field, Connection connection){
-        String sql = "INSERT INTO test(field)" + "VALUES (?);";
+    public static ResultSet getData(Connection connection){
+        String sql = "SELECT * FROM match_statistics";
+        ResultSet results;
         try{
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, field);
-            preparedStatement.executeUpdate();
+            Statement statement = connection.createStatement();
+            results = statement.executeQuery(sql);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return results;
+    }
+
+    public static void createPlayerStatsTable(Connection connection){
+        String sql = "CREATE TABLE IF NOT EXISTS player_statistics (" +
+                "username VARCHAR(255) PRIMARY KEY," +
+                " gamesPlayed INT," +
+                " kills INT, deaths INT," +
+                " assists INT, kda DOUBLE," +
+                " firstBloodKill INT," +
+                " pentaKills INT," +
+                " goldPerMinute DOUBLE," +
+                " minionsPerMinute DOUBLE," +
+                " visionPerMinute DOUBLE" +
+                ")";
+        try{
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
         }
         catch(SQLException e){
             System.out.println(e.getMessage());
         }
     }
+    public static void createPlayersInTable(Connection connection){
+        ResultSet results = getData(connection);
+        String sql;
+        try {
+            Statement statement = connection.createStatement();
+            while (results.next()) {
+                sql = "INSERT IGNORE INTO player_statistics (username) VALUES (\"" + results.getString("summonerName") + "\")";
+                statement.execute(sql);
+            }
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    public static void updateStats(Connection connection){
+        String sql;
+        ResultSet statistics;
+        ResultSet results = getData(connection);
+        try {
+            sql = "SELECT * FROM player_statistics";
+            Statement statement = connection.createStatement();
+            statistics = statement.executeQuery(sql);
+            while(results.next()){
+                updateStatsByColumn(connection, statement, results, "gamesPlayed");
+                updateStatsByColumn(connection, statement, results, "kills");
+                updateStatsByColumn(connection, statement, results, "deaths");
+                updateStatsByColumn(connection, statement, results, "assists");
+                updateStatsByColumn(connection, statement, results, "firstBloodKill");
+                updateStatsByColumn(connection, statement, results, "pentaKills");
+            }
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void updateStatsByColumn(Connection connection, Statement statement, ResultSet results, String column) {
+        int tempInt = 0;
+        try {
+            String sql = "SELECT " + column + " FROM player_statistics WHERE username = \"" + results.getString("summonerName") + "\"";
+            ResultSet tempRS = statement.executeQuery(sql);
+            tempRS.next();
+            if(column == "gamesPlayed"){
+                tempInt = tempRS.getInt(column) + 1;
+            }
+            else{
+                tempInt = tempRS.getInt(column) + results.getInt(column);
+            }
+            sql = "UPDATE player_statistics SET " + column + " = " + tempInt + " WHERE username = \"" + results.getString("summonerName") + "\"";
+            statement.execute(sql);
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
