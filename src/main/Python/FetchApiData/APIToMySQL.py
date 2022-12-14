@@ -40,6 +40,8 @@ def insert_to_match_statistics_table(match_statistics):
         results = mycursor.fetchall()
         last_row_id = mycursor.rowcount
 
+
+
         mycursor.execute(
             "SELECT summoner_name, match_id, COUNT(*) "
             "FROM match_statistics "
@@ -50,9 +52,8 @@ def insert_to_match_statistics_table(match_statistics):
         row_count = mycursor.rowcount
 
         if row_count == 0: # add row if row with this matchId and summonerName doesn't exist
-
             val = (
-                last_row_id,
+                last_row_id+1,
                 summoner,
                 match_statistics[summoner]['matchId'],
                 match_statistics[summoner]['gameDuration'],
