@@ -3,7 +3,6 @@ package com.example.esportsmanagement.user.jpa.data;
 import java.sql.*;
 
 public class ManageDatabase {
-
     public static void main(String[] args) throws SQLException {
         Connection connection = connect();
         createPlayerStatsTable(connection);
@@ -14,7 +13,6 @@ public class ManageDatabase {
             System.out.println("Disconnected from the database");
         }
     }
-
     public static Connection connect(){
         Connection connection = null;
         try
@@ -29,7 +27,6 @@ public class ManageDatabase {
         }
         return connection;
     }
-
     public static ResultSet getData(Connection connection){
         String sql = "SELECT * FROM match_statistics";
         ResultSet results;
@@ -43,7 +40,6 @@ public class ManageDatabase {
         }
         return results;
     }
-
     public static void createPlayerStatsTable(Connection connection){
         String sql = "CREATE TABLE IF NOT EXISTS player_statistics (" +
                 "username VARCHAR(255) PRIMARY KEY," +
@@ -100,7 +96,6 @@ public class ManageDatabase {
             System.out.println(e.getMessage());
         }
     }
-
     public static void updateStatsByColumn(Connection connection, Statement statement, ResultSet results, String column) {
         int tempInt = 0;
         try {
