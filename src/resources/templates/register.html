@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <meta charset="utf-8">
-<script>
-    function onChange() {
-        const password = document.querySelector('input[name=password]');
-        const confirm = document.querySelector('input[name=confirm]');
-        if (confirm.value === password.value) {
-            confirm.setCustomValidity('');
-        } else {
-            confirm.setCustomValidity('Passwords do not match');
+
+<head>
+    <link rel="stylesheet" href="/css/style.css" type="text/css"/>
+    <script>
+        function onChange() {
+            const password = document.querySelector('input[name=password]');
+            const confirm = document.querySelector('input[name=confirm]');
+            if (confirm.value === password.value) {
+                confirm.setCustomValidity('');
+            } else {
+                confirm.setCustomValidity('Passwords do not match');
+            }
         }
-    }
-</script>
+    </script>
+</head>
 <body class="hold-transition register-page">
 <div class="register-box">
 

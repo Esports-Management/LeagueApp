@@ -18,11 +18,16 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
+<<<<<<< Updated upstream
                         .requestMatchers(
                                 "/**"
                         ).permitAll()
+=======
+                        .requestMatchers("/", "/find", "/register","/css/style.css","/img/Aatroxfr.png"
+                        ,"/img/teemo.jpeg","/img/Ashe.png","/css/forregistersuccess.css",
+                                "/img/morgana2.jpg", "/img/kayle.jpg","/img/shen.jpg").permitAll()
+>>>>>>> Stashed changes
                         .requestMatchers("/dashboard").hasRole("USER")
-
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
