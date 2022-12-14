@@ -48,13 +48,12 @@ public class ManageDatabase {
         String sql = "CREATE TABLE IF NOT EXISTS player_statistics (" +
                 "username VARCHAR(255) PRIMARY KEY," +
                 " gamesPlayed INT," +
-                " kills INT, deaths INT," +
-                " assists INT, kda DOUBLE," +
-                " firstBloodKill INT," +
-                " pentaKills INT," +
-                " goldPerMinute DOUBLE," +
-                " minionsPerMinute DOUBLE," +
-                " visionPerMinute DOUBLE" +
+                " kills INT," +
+                " deaths INT," +
+                " assists INT," +
+                " kda DECIMAL(10,1)," +
+                " first_blood_kill INT," +
+                " penta_kills INT" +
                 ")";
         try{
             Statement statement = connection.createStatement();
@@ -70,7 +69,7 @@ public class ManageDatabase {
         try {
             Statement statement = connection.createStatement();
             while (results.next()) {
-                sql = "INSERT IGNORE INTO player_statistics (username) VALUES (\"" + results.getString("summonerName") + "\")";
+                sql = "INSERT IGNORE INTO player_statistics (username) VALUES (\"" + results.getString("summoner_name") + "\")";
                 statement.execute(sql);
             }
         }
@@ -92,8 +91,9 @@ public class ManageDatabase {
                 updateStatsByColumn(connection, statement, results, "kills");
                 updateStatsByColumn(connection, statement, results, "deaths");
                 updateStatsByColumn(connection, statement, results, "assists");
-                updateStatsByColumn(connection, statement, results, "firstBloodKill");
-                updateStatsByColumn(connection, statement, results, "pentaKills");
+                updateStatsByColumn(connection, statement, results, "first_blood_kill");
+                updateStatsByColumn(connection, statement, results, "penta_kills");
+                updateKda(connection, statement, results);
             }
         }
         catch(SQLException e){
@@ -104,7 +104,7 @@ public class ManageDatabase {
     public static void updateStatsByColumn(Connection connection, Statement statement, ResultSet results, String column) {
         int tempInt = 0;
         try {
-            String sql = "SELECT " + column + " FROM player_statistics WHERE username = \"" + results.getString("summonerName") + "\"";
+            String sql = "SELECT " + column + " FROM player_statistics WHERE username = \"" + results.getString("summoner_name") + "\"";
             ResultSet tempRS = statement.executeQuery(sql);
             tempRS.next();
             if(column == "gamesPlayed"){
@@ -113,7 +113,7 @@ public class ManageDatabase {
             else{
                 tempInt = tempRS.getInt(column) + results.getInt(column);
             }
-            sql = "UPDATE player_statistics SET " + column + " = " + tempInt + " WHERE username = \"" + results.getString("summonerName") + "\"";
+            sql = "UPDATE player_statistics SET " + column + " = " + tempInt + " WHERE username = \"" + results.getString("summoner_name") + "\"";
             statement.execute(sql);
         }
         catch(SQLException e)
@@ -121,5 +121,24 @@ public class ManageDatabase {
             System.out.println(e.getMessage());
         }
     }
-
+    public static void updateKda(Connection connection, Statement statement, ResultSet results) {
+        double tempDouble = 0;
+        try {
+            String sql = "SELECT * FROM player_statistics WHERE username = \"" + results.getString("summoner_name") + "\"";
+            ResultSet tempRs = statement.executeQuery(sql);
+            tempRs.next();
+            int deaths = tempRs.getInt("deaths");
+            if (deaths == 0){
+                deaths = 1;
+            }
+            tempDouble = (tempRs.getInt("kills") + tempRs.getInt("assists")) /(double)deaths;
+            System.out.println("Kills " + tempRs.getInt("Kills") + " Assists " + tempRs.getInt("assists") + " Deaths " + deaths + " KDA " + tempDouble);
+            sql = "UPDATE player_statistics SET kda = " + tempDouble + " WHERE username = \"" + results.getString("summoner_name") + "\"";
+            statement.execute(sql);
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
 }
