@@ -13,9 +13,6 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${match_list.empty}">
-        <td colspan="2"> No match stats found </td>
-    </tr>
     <tr th:each="match : ${match_list}">
         <td>
             <a th:href="@{/match-statistics(id=${match})}"><span th:text="${match}"></span></a>

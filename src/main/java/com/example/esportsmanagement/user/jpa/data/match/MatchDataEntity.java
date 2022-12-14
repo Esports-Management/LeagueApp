@@ -33,36 +33,36 @@ public class MatchDataEntity {
     private String championName;
 
     @Column(name = "kills")
-    private int kills;
+    private Integer kills;
 
     @Column(name = "deaths")
-    private int deaths;
+    private Integer deaths;
 
     @Column(name = "assists")
-    private int assists;
+    private Integer assists;
 
     @Column(name = "firstBloodKill")
     private Boolean firstBloodKill;
 
     @Column(name = "goldEarned")
-    private int goldEarned;
+    private Integer goldEarned;
 
     @Column(name = "pentaKills")
-    private int pentaKills;
+    private Integer pentaKills;
 
     @Column(name = "timeCcingOthers")
-    private int timeCCingOthers;
+    private Integer timeCCingOthers;
 
     @Column(name = "totalTimeCcDealt")
-    private int totalTimeCCDealt;
+    private Integer totalTimeCCDealt;
 
     @Column(name = "totalDamageDealtToChampions")
-    private int totalDamageDealtToChampions;
+    private Integer totalDamageDealtToChampions;
 
     @Column(name = "totalMinionsKilled")
-    private int totalMinionsKilled;
+    private Integer totalMinionsKilled;
 
     @Column(name = "visionScore")
-    private int visionScore;
+    private Integer visionScore;
 
 }
