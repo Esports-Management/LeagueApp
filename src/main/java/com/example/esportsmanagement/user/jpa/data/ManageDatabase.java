@@ -1,6 +1,7 @@
 package com.example.esportsmanagement.user.jpa.data;
 
 import java.sql.*;
+import com.example.esportsmanagement.web.controller.match.config;
 
 public class ManageDatabase {
     public static void main(String[] args) throws SQLException {
@@ -17,7 +18,7 @@ public class ManageDatabase {
         Connection connection = null;
         try
         {
-            String url = "jdbc:mysql://localhost:8889/Users_db?user=root";
+            String url = config.getUrl();
             connection = DriverManager.getConnection(url);
             System.out.println("Connected to the database");
         }

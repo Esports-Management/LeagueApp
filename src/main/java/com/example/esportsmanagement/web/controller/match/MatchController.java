@@ -29,7 +29,7 @@ public class MatchController {
             ) throws Exception {
 
             try {
-                ProcessBuilder pb = new ProcessBuilder(configforpython.getConfig(),
+                ProcessBuilder pb = new ProcessBuilder(config.getConfig(),
                         "src\\main\\Python\\FetchApiData\\riotAPI.py", region, match_id
                 );
                 Process p = pb.start();
