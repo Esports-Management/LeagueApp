@@ -3,7 +3,7 @@ import java.sql.*;
 import com.example.esportsmanagement.web.controller.match.config;
 
 public class ManageDatabase {
-    public static void main(String[] args) throws SQLException {
+    public static void createPlayerTable() throws SQLException {
         Connection connection = connect();
         createPlayerStatsTable(connection);
         createPlayersInTable(connection);

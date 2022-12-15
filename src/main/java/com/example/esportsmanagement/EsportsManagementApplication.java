@@ -1,14 +1,24 @@
 package com.example.esportsmanagement;
 
-import com.example.esportsmanagement.web.controller.user.RegistrationController;
+import com.example.esportsmanagement.web.controller.match.config;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import com.example.esportsmanagement.user.jpa.data.ManageDatabase;
+import com.example.esportsmanagement.user.jpa.data.UpdateDatabaseWithMatches;
+
 
 @SpringBootApplication
 public class EsportsManagementApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(EsportsManagementApplication.class, args);    }
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(EsportsManagementApplication.class, args);
+
+        String match_ids = config.getMatchIds();
+        String region = config.getDefaultRegion();
+        //UpdateDatabaseWithMatches.updateDatabaseWithMatches(region, match_ids);
+        ManageDatabase.createPlayerTable();
+    }
+
+
 
 }
