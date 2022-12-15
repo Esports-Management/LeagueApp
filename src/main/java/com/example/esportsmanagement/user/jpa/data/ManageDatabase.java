@@ -135,7 +135,6 @@ public class ManageDatabase {
                 deaths = 1;
             }
             tempDouble = (tempRs.getInt("kills") + tempRs.getInt("assists")) /(double)deaths;
-            System.out.println("Kills " + tempRs.getInt("Kills") + " Assists " + tempRs.getInt("assists") + " Deaths " + deaths + " KDA " + tempDouble);
             sql = "UPDATE player_statistics SET kda = " + tempDouble + " WHERE username = \"" + results.getString("summoner_name") + "\"";
             statement.execute(sql);
         }
