@@ -41,7 +41,15 @@ public class ManageDatabase {
         return results;
     }
     public static void createPlayerStatsTable(Connection connection){
-        String sql = "CREATE TABLE IF NOT EXISTS player_statistics (" +
+        String sql = "DROP TABLE player_statistics";
+        try{
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        sql = "CREATE TABLE player_statistics (" +
                 "username VARCHAR(255) PRIMARY KEY," +
                 " games_played INT," +
                 " kills INT," +

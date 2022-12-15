@@ -12,10 +12,6 @@ public class EsportsManagementApplication {
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(EsportsManagementApplication.class, args);
-
-        String match_ids = config.getMatchIds();
-        String region = config.getDefaultRegion();
-        //UpdateDatabaseWithMatches.updateDatabaseWithMatches(region, match_ids);
         ManageDatabase.createPlayerTable();
     }
 
