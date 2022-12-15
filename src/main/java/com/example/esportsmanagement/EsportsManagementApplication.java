@@ -12,7 +12,7 @@ public class EsportsManagementApplication {
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(EsportsManagementApplication.class, args);
-        ManageDatabase.createPlayerTable();
+
     }
 
 
