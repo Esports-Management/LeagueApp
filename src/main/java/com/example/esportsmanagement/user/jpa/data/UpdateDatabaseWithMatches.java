@@ -1,25 +1,23 @@
 package com.example.esportsmanagement.user.jpa.data;
 
+import com.example.esportsmanagement.logger.CustomLogging;
 import com.example.esportsmanagement.web.controller.match.config;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static java.util.regex.Pattern.CASE_INSENSITIVE;
 
 public class UpdateDatabaseWithMatches {
 
-    private static final Logger logger = LogManager.getLogger("User Match ID and region Input");
+    //private static final Logger logger = LogManager.getLogger("User Match ID and region Input");
 
     public static void updateDatabaseWithMatches(String region, String match_ids) throws Exception {
-
-        logger.info(region, match_ids);
+        CustomLogging.logger.info(region);
+        CustomLogging.logger.info(match_ids);
+        //logger.info(region, match_ids);
 
 //
 //        String[] regionArray = new String[] {"eun1", "euw1"};
@@ -50,7 +48,7 @@ public class UpdateDatabaseWithMatches {
                 System.out.println(line);
             }
         } catch (Exception e) {
-            logger.error("Unable to fetch data through API", e);
+            CustomLogging.logger.error("Unable to fetch data through API", e);
             System.out.println(e);
         }
 

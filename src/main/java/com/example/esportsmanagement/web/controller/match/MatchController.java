@@ -5,12 +5,12 @@ import com.example.esportsmanagement.user.jpa.data.match.MatchDataService;
 import com.example.esportsmanagement.user.jpa.data.UpdateDatabaseWithMatches;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import com.example.esportsmanagement.user.jpa.data.ManageDatabase;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -18,13 +18,14 @@ import java.util.Set;
 
 @Controller
 public class MatchController {
+
     @GetMapping("/find")
     public String find(){
         return "/find";
     }
 
-    @PostMapping("/find")
-    public String findResults(
+    @RequestMapping(value="/find", method= RequestMethod.POST, params = "submit")
+    public String addMatchesById(
             @RequestParam("match_id") String match_id,
             @RequestParam("region") String region
             ) throws Exception {
@@ -34,8 +35,18 @@ public class MatchController {
         return "/find";
     }
 
-    private MatchDataService matchDataService;
+    @RequestMapping(value="/find", method= RequestMethod.POST, params = "update player stats")
+    public String updatePlayerTable() throws Exception {
+        try {
+            ManageDatabase.createPlayerTable();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
+        return "/find";
+    }
+
+    private MatchDataService matchDataService;
 
     public MatchController(MatchDataService matchDataService) {
         this.matchDataService = matchDataService;
