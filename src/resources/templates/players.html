@@ -4,21 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Summoner List</title>
+    <link rel="stylesheet" href="/css/table.css" type="text/css"/>
+
 </head>
 <body>
-<table>
-    <thead>
-    <tr>
-        <th> Summoners </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="player : ${player_list}">
-        <td>
-            <a th:href="@{/player-statistics(username=${player})}"><span th:text="${player}"></span></a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th> Summoners </th>
+        </tr>
+        </thead>
+    </table>
+
+        <table>
+        <tbody>
+        <tr th:each="player : ${player_list}">
+            <td>
+                <a th:href="@{/player-statistics(username=${player})}"><span th:text="${player}"></span></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
