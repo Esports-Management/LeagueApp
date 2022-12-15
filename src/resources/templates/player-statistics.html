@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Player statistics</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th> Summoner Name </th>
+        <th> Games Played </th>
+        <th> Kills </th>
+        <th> Deaths </th>
+        <th> Assists </th>
+        <th> KDA </th>
+        <th> First Blood Kills </th>
+        <th> Penta Kills </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="player_stats : ${player}">
+        <td>
+            <span th:text="${player_stats.username}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.gamesPlayed}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.kills}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.deaths}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.assists}"></span>
+        </td>
+
+        <td>
+            <span th:inline="text">[[${#numbers.formatDecimal(player_stats.kda, 1, 1, 'POINT')}]]</span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.first_blood_kill}"></span>
+        </td>
+
+        <td>
+            <span th:text="${player_stats.penta_kills}"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

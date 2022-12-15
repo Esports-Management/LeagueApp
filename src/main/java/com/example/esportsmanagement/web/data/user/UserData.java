@@ -6,8 +6,8 @@ import java.io.Serializable;
 
 public class UserData implements Serializable {
 
-    @NotEmpty(message = "Nickname can not be empty")
-    private String nickName;
+    @NotEmpty(message = "Username can not be empty")
+    private String userName;
 
     @NotEmpty(message = "First name can not be empty")
     private String firstName;
@@ -36,8 +36,8 @@ public class UserData implements Serializable {
         return lastName;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getUserName() {
+        return userName;
     }
 
     public void setFirstName(String firstName) {
@@ -46,8 +46,8 @@ public class UserData implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     public void setEmail(String email) {
         this.email = email;

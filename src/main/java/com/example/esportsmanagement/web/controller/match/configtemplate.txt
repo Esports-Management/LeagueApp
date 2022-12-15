@@ -1,0 +1,13 @@
+package com.example.esportsmanagement.web.controller.match;
+
+public class config {
+    public static String getConfig() {
+        String url = ("venv\\Scripts\\python");
+        return url;
+    }
+
+    public static String getUrl() {
+        String url = ("jdbc:mysql://localhost:8889/Users_db?user=root");
+        return url;
+    }
+}

@@ -4,6 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 /src/resources/application.properties
+/src/main/Python/FetchApiData/config.py
+src/main/java/com/example/esportsmanagement/web/controller/match/config.java
 
 ### STS ###
 .apt_generated
@@ -32,3 +34,5 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/main/Python/venv/
+*.pyc

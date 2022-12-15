@@ -2,6 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <meta charset="utf-8">
 
+<head>
+    <link rel="stylesheet" href="/css/style.css" type="text/css"/>
+    <script>
+        function onChange() {
+            const password = document.querySelector('input[name=password]');
+            const confirm = document.querySelector('input[name=confirm]');
+            if (confirm.value === password.value) {
+                confirm.setCustomValidity('');
+            } else {
+                confirm.setCustomValidity('Passwords do not match');
+            }
+        }
+    </script>
+</head>
 <body class="hold-transition register-page">
 <div class="register-box">
 
@@ -12,7 +26,7 @@
                 <p th:text="${registrationMsg}"></p>
             </div>
             <div th:if="${registrationMsg != null}">
-                <img class="col-md-12" th:src="${qrCode}" />
+                <img class="col-md-12" th:src="${qrCode}"/>
                 <p th:text="${qrCodeKey}"></p>
             </div>
             <div th:if="${registrationMsg == null}">
@@ -22,7 +36,7 @@
                         <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" th:field="*{firstName}" placeholder="First Name"
+                        <input type="text" class="form-control" th:field="*{firstName}" placeholder="First Name" required
                                th:errorclass="is-invalid">
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -31,17 +45,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" th:field="*{lastName}" placeholder="Last Name"
-                               th:errorclass="is-invalid">
-
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" th:field="*{nickName}" placeholder="Nickname"
+                        <input type="text" class="form-control" th:field="*{lastName}" placeholder="Last Name" required
                                th:errorclass="is-invalid">
 
                         <div class="input-group-append">
@@ -51,7 +55,17 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" th:field="*{email}" placeholder="Email"
+                        <input type="text" class="form-control" th:field="*{userName}" placeholder="Username" required
+                               th:errorclass="is-invalid">
+
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" th:field="*{email}" placeholder="Email" required
                                th:errorclass="is-invalid">
 
                         <div class="input-group-append">
@@ -60,23 +74,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" th:field="*{password}" placeholder="Password"
-                               th:errorclass="is-invalid">
 
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                    <div class="input group mb-3">
+                        <form>
+                           <input placeholder="password" type="password" onChange="onChange()"
+                                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required
+                                                    th:field="*{password}"/> </label><br/>
+                           <input placeholder="confirm" type="password" onChange="onChange()" required/> </label><br/>
+                            <input type="submit"/>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Retype password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="row">
                         <div class="col-8">
@@ -86,9 +97,6 @@
                                     I agree to the <a href="#">terms</a>
                                 </label>
                             </div>
-                        </div>
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Register</button>
                         </div>
                     </div>
                 </form>
