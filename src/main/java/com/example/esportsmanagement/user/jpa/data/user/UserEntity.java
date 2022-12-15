@@ -24,19 +24,10 @@ public class UserEntity implements UserDetails {
     private String password;
     private boolean accountNonLocked;
 
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name = "user_roles",
-//            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
-//    )
-//    private List<Role> roles;
-
     public UserEntity() {
 
     }
 
-    //public void setId(long id) { this.id = id; }
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }

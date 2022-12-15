@@ -29,7 +29,7 @@ public class MatchController {
             ) throws Exception {
 
             try {
-                ProcessBuilder pb = new ProcessBuilder(configforpython.getConfig(),
+                ProcessBuilder pb = new ProcessBuilder(config.getConfig(),
                         "src\\main\\Python\\FetchApiData\\riotAPI.py", region, match_id
                 );
                 Process p = pb.start();
@@ -78,13 +78,6 @@ public class MatchController {
         return "/matchlist";
     }
 
-//    @GetMapping("/match-info/matchid=?{match}") // query db for this entry, return results
-//    public ModelAndView getMatch(@PathVariable("match") String match) {
-//        System.out.println(match);
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("/id=?" + match);
-//        return modelAndView;
-//    }
     @GetMapping("/match-statistics")
     public String getMatchId(@RequestParam("id") String match_id, Model model) {
         List all_players_in_match = matchDataService.findMatchByMatchId(match_id);
@@ -99,20 +92,5 @@ public class MatchController {
         model.addAttribute("match_statistics", match_statistics);
         return "/match-statistics";
     }
-
-//    @PostMapping("/match-statistics")
-//    public String postMatchId(@RequestParam("id") String match_id, Model model) {
-//        List all_players_in_match = matchDataService.findMatchByMatchId(match_id);
-//        List<MatchDataEntity> match_statistics = new ArrayList<MatchDataEntity>();
-//        for (Object player : all_players_in_match) {
-//            if (player instanceof MatchDataEntity) {
-//                MatchDataEntity player_in_match = (MatchDataEntity) player;
-//                match_statistics.add(player_in_match);
-//            }
-//        }
-//
-//        model.addAttribute("match_statistics", match_statistics);
-//        return "/match-statistics";
-//    }
 
 }
