@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -33,7 +35,7 @@ public class PlayerDataEntity {
     private Integer deaths;
 
     @Column(name = "kda")
-    private Double kda;
+    private BigDecimal kda;
 
     @Column(name = "first_blood_kill")
     private Integer first_blood_kill;

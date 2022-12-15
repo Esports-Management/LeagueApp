@@ -17,4 +17,8 @@ public class PlayerDataService {
     public PlayerDataEntity findByUsername(String username) {
         return playerDataRepository.findByUsername(username);
     }
+
+    public List<PlayerDataEntity> findAllPlayers() {
+        return playerDataRepository.findAll();
+    }
 }

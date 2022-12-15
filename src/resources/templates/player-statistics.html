@@ -42,7 +42,7 @@
         </td>
 
         <td>
-            <span th:text="${player_stats.kda}"></span>
+            <span th:inline="text">[[${#numbers.formatDecimal(player_stats.kda, 1, 1, 'POINT')}]]</span>
         </td>
 
         <td>
