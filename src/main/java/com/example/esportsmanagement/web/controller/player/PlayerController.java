@@ -23,6 +23,9 @@ public class PlayerController {
     @GetMapping("/player-statistics")
     public String getMatchId(@RequestParam("username") String username, Model model) {
         PlayerDataEntity player = playerDataService.findByUsername(username);
+        if (player == null) {
+            return "/player-not-found";
+        }
 
         model.addAttribute("player", player);
         return "/player-statistics";
@@ -38,7 +41,9 @@ public class PlayerController {
                 player_set.add(player_entity.getUsername());
             }
         }
-        System.out.println(player_set);
+        if (player_set.isEmpty()) {
+            return "/player-not-found";
+        }
 
         model.addAttribute("player_list", player_set);
         return "/players";
