@@ -4,56 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Player statistics</title>
+    <link rel="stylesheet" href="/css/table.css" type="text/css"/>
 </head>
 <body>
-<table>
+<div class="tbl-header">
+    <table>
     <thead>
     <tr>
-        <th> Summoner Name </th>
-        <th> Games Played </th>
-        <th> Kills </th>
-        <th> Deaths </th>
-        <th> Assists </th>
-        <th> KDA </th>
-        <th> First Blood Kills </th>
-        <th> Penta Kills </th>
+        <th> Summoner Name</th>
+        <th> Games Played</th>
+        <th> Kills</th>
+        <th> Deaths</th>
+        <th> Assists</th>
+        <th> KDA</th>
+        <th> First Blood Kills</th>
+        <th> Penta Kills</th>
     </tr>
     </thead>
-    <tbody>
-    <tr th:each="player_stats : ${player}">
-        <td>
-            <span th:text="${player_stats.username}"></span>
-        </td>
+    </table>
+</div>
+<div class="tbl-content">
+    <table>
+        <tbody>
+        <tr th:each="player_stats : ${player}">
+            <td>
+                <span th:text="${player_stats.username}"></span>
+            </td>
 
-        <td>
-            <span th:text="${player_stats.gamesPlayed}"></span>
-        </td>
+            <td>
+                <span th:text="${player_stats.gamesPlayed}"></span>
+            </td>
 
-        <td>
-            <span th:text="${player_stats.kills}"></span>
-        </td>
+            <td>
+                <span th:text="${player_stats.kills}"></span>
+            </td>
 
-        <td>
-            <span th:text="${player_stats.deaths}"></span>
-        </td>
+            <td>
+                <span th:text="${player_stats.deaths}"></span>
+            </td>
 
-        <td>
-            <span th:text="${player_stats.assists}"></span>
-        </td>
+            <td>
+                <span th:text="${player_stats.assists}"></span>
+            </td>
 
-        <td>
-            <span th:text="${player_stats.kda}"></span>
-        </td>
+            <td>
+                <span th:text="${player_stats.kda}"></span>
+            </td>
 
-        <td>
-            <span th:text="${player_stats.first_blood_kill}"></span>
-        </td>
+            <td>
+                <span th:text="${player_stats.first_blood_kill}"></span>
+            </td>
 
-        <td>
-            <span th:text="${player_stats.penta_kills}"></span>
-        </td>
-    </tr>
-    </tbody>
-</table>
+            <td>
+                <span th:text="${player_stats.penta_kills}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
