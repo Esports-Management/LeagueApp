@@ -1,13 +1,10 @@
 package com.example.esportsmanagement.user.jpa.data;
 
 import com.example.esportsmanagement.logger.CustomLogging;
-import com.example.esportsmanagement.web.controller.match.config;
+import com.example.esportsmanagement.config.config;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 
 public class UpdateDatabaseWithMatches {

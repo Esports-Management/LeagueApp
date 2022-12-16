@@ -1,6 +1,6 @@
 package com.example.esportsmanagement.user.jpa.data;
 import java.sql.*;
-import com.example.esportsmanagement.web.controller.match.config;
+import com.example.esportsmanagement.config.config;
 
 public class ManageDatabase {
 
