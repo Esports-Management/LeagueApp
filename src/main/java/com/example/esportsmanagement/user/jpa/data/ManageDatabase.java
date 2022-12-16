@@ -1,9 +1,10 @@
 package com.example.esportsmanagement.user.jpa.data;
 import java.sql.*;
-import com.example.esportsmanagement.web.controller.match.config;
+import com.example.esportsmanagement.config.config;
 
 public class ManageDatabase {
-    public static void main(String[] args) throws SQLException {
+
+    public static void createPlayerTable() throws SQLException {
         Connection connection = connect();
         createPlayerStatsTable(connection);
         createPlayersInTable(connection);
@@ -41,7 +42,15 @@ public class ManageDatabase {
         return results;
     }
     public static void createPlayerStatsTable(Connection connection){
-        String sql = "CREATE TABLE IF NOT EXISTS player_statistics (" +
+        String sql = "DROP TABLE player_statistics";
+        try{
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        sql = "CREATE TABLE player_statistics (" +
                 "username VARCHAR(255) PRIMARY KEY," +
                 " games_played INT," +
                 " kills INT," +
@@ -127,7 +136,6 @@ public class ManageDatabase {
                 deaths = 1;
             }
             tempDouble = (tempRs.getInt("kills") + tempRs.getInt("assists")) /(double)deaths;
-            System.out.println("Kills " + tempRs.getInt("Kills") + " Assists " + tempRs.getInt("assists") + " Deaths " + deaths + " KDA " + tempDouble);
             sql = "UPDATE player_statistics SET kda = " + tempDouble + " WHERE username = \"" + results.getString("summoner_name") + "\"";
             statement.execute(sql);
         }

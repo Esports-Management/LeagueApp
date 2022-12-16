@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Your Title</title>
+    <title>Homepage</title>
 
     <link rel="stylesheet" href="/css/style.css" type="text/css"/>
-    <meta charset="UTF-8">
-
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <div>
@@ -17,13 +16,18 @@
     <p>Match list</p>
 </div>
 <div>
-    <img onClick="location.href='register'" class="img-responsive" src="static/img/teemo.jpeg" th:src="@{img/teemo.jpeg}" width="200" height="200" style="--color:#0B486B"/>
+    <img onClick="location.href='players'" class="img-responsive" src="static/img/azir.png" th:src="@{img/azir.png}" width="200" height="200" -- style="--color: #FF00BB"/>
+    <p>Players</p>
+</div>
+<div>
+    <img  onClick="location.href='register'" class="img-responsive" src="static/img/teemo.jpeg" th:src="@{img/teemo.jpeg}" width="200" height="200" style="--color:#0B486B"/>
     <p>Register</p>
 </div>
 <div>
     <img onClick="location.href='login'"  class="img-responsive" src="static/img/Ashe.png" th:src="@{img/Ashe.png}" width="200" height="200" style="--color:#BD1550"/>
-        <p>Login</p>
+    <p>Login</p>
 </div>
+
 
 
 

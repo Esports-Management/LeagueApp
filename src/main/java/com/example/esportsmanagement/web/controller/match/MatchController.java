@@ -2,14 +2,15 @@ package com.example.esportsmanagement.web.controller.match;
 
 import com.example.esportsmanagement.user.jpa.data.match.MatchDataEntity;
 import com.example.esportsmanagement.user.jpa.data.match.MatchDataService;
+import com.example.esportsmanagement.user.jpa.data.UpdateDatabaseWithMatches;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import com.example.esportsmanagement.user.jpa.data.ManageDatabase;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -17,43 +18,35 @@ import java.util.Set;
 
 @Controller
 public class MatchController {
+
     @GetMapping("/find")
     public String find(){
         return "/find";
     }
 
-    @PostMapping("/find")
-    public String findResults(
+    @RequestMapping(value="/find", method= RequestMethod.POST, params = "submit")
+    public String addMatchesById(
             @RequestParam("match_id") String match_id,
             @RequestParam("region") String region
             ) throws Exception {
 
-            try {
-                ProcessBuilder pb = new ProcessBuilder(config.getConfig(),
-                        "src\\main\\Python\\FetchApiData\\riotAPI.py", region, match_id
-                );
-                Process p = pb.start();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                BufferedReader errorReader = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+        UpdateDatabaseWithMatches.updateDatabaseWithMatches(region, match_id);
 
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
-                }
-                while ((line = errorReader.readLine()) != null) {
-                    System.out.println(line);
-                }
-                System.out.println("All went well");
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+        return "/find";
+    }
 
+    @RequestMapping(value="/find", method= RequestMethod.POST, params = "update player stats")
+    public String updatePlayerTable() throws Exception {
+        try {
+            ManageDatabase.createPlayerTable();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         return "/find";
     }
 
     private MatchDataService matchDataService;
-
 
     public MatchController(MatchDataService matchDataService) {
         this.matchDataService = matchDataService;
@@ -74,13 +67,20 @@ public class MatchController {
             }
         }
 
+
         model.addAttribute("match_list", match_id_set);
         return "/matchlist";
     }
 
     @GetMapping("/match-statistics")
     public String getMatchId(@RequestParam("id") String match_id, Model model) {
+
         List all_players_in_match = matchDataService.findMatchByMatchId(match_id);
+
+        if (all_players_in_match.isEmpty()) {
+            return "/match-not-found";
+        }
+
         List<MatchDataEntity> match_statistics = new ArrayList<MatchDataEntity>();
         for (Object player : all_players_in_match) {
             if (player instanceof MatchDataEntity) {
@@ -88,9 +88,7 @@ public class MatchController {
                 match_statistics.add(player_in_match);
             }
         }
-
         model.addAttribute("match_statistics", match_statistics);
         return "/match-statistics";
     }
-
 }
